@@ -1,0 +1,13 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+*{
+  font-family: 'Cuprum', sans-serif;
+}
+a{
+  text-decoration: none
+}
+
+.homeHero h3{
+  text-shadow: 2px 2px 4px rgba(44, 62, 80, 1);
+
+}

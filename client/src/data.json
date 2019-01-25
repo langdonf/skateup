@@ -1,0 +1,139 @@
+[
+    {
+        "title": "City Tour",
+        "hometown":"San Francisco", 
+        "date":"Apr. 21, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://media.bizj.us/view/img/116461/deal-2003-ferry-building*750xx1500-844-0-35.jpg",
+        "start":{
+            "lat":"37.795158",
+            "lon":"-122.393837"
+        }
+        
+    },
+    {
+        "title": "Albany Bulb to Berkeley Bowl",
+        "hometown":"Albany", 
+        "date":"Jun. 13, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "http://s3.amazonaws.com/issue-assets/assets/assets/000/000/364/original/albanybulb-cover.jpeg?1406654747",
+        "start":{
+            "lat":"37.889651",
+            "lon":"-122.323267"
+        } 
+        
+    },
+    {
+        "title": "Pub Hop",
+        "hometown":"Berkeley", 
+        "date":"Feb. 3, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://www.mercurynews.com/wp-content/uploads/2017/02/cct-brewery-0305-01.jpg?w=620",
+        "start":{
+            "lat":"37.881129",
+            "lon":"-122.302212"
+        }
+        
+    },
+    {
+        "title": "Hill Climb Bonanza",
+        "hometown":"Berkeley", 
+        "date":"Juyly. 17, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://www.berkeleyside.com/wp-content/uploads/2014/05/Screen-shot-2014-05-19-at-2.31.01-PM-900x672.png",
+        "start":{
+            "lat":"37.879917",
+            "lon":"-122.257873"
+        }
+        
+    },
+    {
+        "title": "City Tour",
+        "hometown":"San Francisco", 
+        "date":"Apr. 21, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://media.bizj.us/view/img/116461/deal-2003-ferry-building*750xx1500-844-0-35.jpg",
+        "start":{
+            "lat":"37.795148",
+            "lon":"-122.393837"
+        }
+        
+    },
+    {
+        "title": "Albany Bulb to Berkeley Bowl",
+        "hometown":"Albany", 
+        "date":"Jun. 13, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "http://s3.amazonaws.com/issue-assets/assets/assets/000/000/364/original/albanybulb-cover.jpeg?1406654747",
+        "start":{
+            "lat":"37.885251",
+            "lon":"-122.323267"
+        }
+    },
+    {
+        "title": "Pub Hop",
+        "hometown":"Berkeley", 
+        "date":"Feb. 3, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://www.mercurynews.com/wp-content/uploads/2017/02/cct-brewery-0305-01.jpg?w=620",
+        "start":{
+            "lat":"37.881629",
+            "lon":"-122.302212"
+        }
+    },
+    {
+        "title": "Hill Climb Bonanza",
+        "hometown":"Berkeley", 
+        "date":"Juyly. 17, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://www.berkeleyside.com/wp-content/uploads/2014/05/Screen-shot-2014-05-19-at-2.31.01-PM-900x672.png",
+        "start":{
+            "lat":"37.829917",
+            "lon":"-122.257873"
+        }
+    },
+    {
+        "title": "City Tour",
+        "hometown":"San Francisco", 
+        "date":"Apr. 21, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://media.bizj.us/view/img/116461/deal-2003-ferry-building*750xx1500-844-0-35.jpg",
+        "start":{
+            "lat":"37.095158",
+            "lon":"-122.393837"
+        }
+    },
+    {
+        "title": "Albany Bulb to Berkeley Bowl",
+        "hometown":"Albany", 
+        "date":"Jun. 13, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "http://s3.amazonaws.com/issue-assets/assets/assets/000/000/364/original/albanybulb-cover.jpeg?1406654747",
+        "start":{
+            "lat":"37.885651",
+            "lon":"-122.323267"
+        } 
+    },
+    {
+        "title": "Pub Hop",
+        "hometown":"Berkeley", 
+        "date":"Feb. 3, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://www.mercurynews.com/wp-content/uploads/2017/02/cct-brewery-0305-01.jpg?w=620",
+        "start":{
+            "lat":"37.891629",
+            "lon":"-122.302212"
+        }
+    },
+    {
+        "title": "Hill Climb Bonanza",
+        "hometown":"Berkeley", 
+        "date":"Juyly. 17, 2019 3:00pm", 
+        "details":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", 
+        "photo": "https://www.berkeleyside.com/wp-content/uploads/2014/05/Screen-shot-2014-05-19-at-2.31.01-PM-900x672.png",
+        "start":{
+            "lat":"37.869917",
+            "lon":"-122.257873"
+        }
+    }
+]
