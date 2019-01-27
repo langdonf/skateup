@@ -5,12 +5,12 @@ import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
-import seed from '../../../data.json'
+
 import { Typography } from "@material-ui/core";
+import Axios from "axios";
 
 
 const styles = theme => ({
@@ -29,6 +29,22 @@ class MyEvents extends React.Component{
         this.state = {
             myEvents: []
         }
+    }
+
+    componentDidMount(){
+        var userId = localStorage.getItem('userId')
+       
+        Axios.get(`http://localhost:3001/api/events/user/${userId}`)
+        .then((response)=>{
+            console.log(response.data);
+            var events = response.data.data;
+            this.setState({
+                myEvents : events
+            })
+    }).catch(err=>{
+        console.log(err.response)
+    })
+
     }
     render(){
     const { classes } = this.props;

@@ -63,6 +63,7 @@ router.post("/login", (req, res) => {
         });
     });
 })
+
 router.post("/register", (req, res) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);

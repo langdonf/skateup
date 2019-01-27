@@ -17,7 +17,7 @@ const styles = theme => ({
 
 function Home(props) {
     const { classes } = props;
-
+    
     return (
         <div className={classes.root} style={style}>
             <Grid container spacing={24}>

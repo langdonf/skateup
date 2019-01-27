@@ -63,14 +63,20 @@ class Nav extends React.Component{
         
     }
   }
+  fileInput = React.createRef();
   createEvent=()=>{
+    // console.log(this.fileInput.current.files);
     const newEvent = {
       title: this.state.title,
       details: this.state.details,
       city: this.state.city,
       start: this.state.startPoint,
-      date: this.state.selectedDate
+      date: this.state.selectedDate,
+      photo: this.fileInput.current.files[0]
+      
+      
     }
+   console.log(newEvent.photo);
    axios.post('http://localhost:3001/api/events/newevent', {userId: localStorage.getItem('userId'), newEvent }
      
    ).then(function(response){
@@ -170,7 +176,7 @@ class Nav extends React.Component{
               >
                 <div  style={{alignItems:'center',justifyContent:'center'}} className={classes.paper} >
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                 <form className={classes.container} autoComplete="on">
+                 <form enctype="multipart/form-data" className={classes.container} autoComplete="on">
             <TextField
                 id="title"
                 label="Event Title"
@@ -181,6 +187,7 @@ class Nav extends React.Component{
                 variant="outlined"
                 fullWidth={true}
             />
+             
             <TextField
                 id="city"
                 label="City"
@@ -224,7 +231,20 @@ class Nav extends React.Component{
             onChange={this.handleDateChange}
           />
         </Grid>
-        
+        <input
+        hidden
+        ref={this.fileInput}
+        name="photo"
+        accept="image/*"
+        className={classes.input}
+        id="contained-button-file"
+        type="file"
+      />
+      <label htmlFor="contained-button-file">
+        <Button variant="contained" component="span" className={classes.button}>
+          Upload
+        </Button>
+      </label>
            
           
            

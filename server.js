@@ -6,6 +6,8 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const events = require("./routes/api/events");
 var cors = require('cors')
+const multer = require('multer')
+
 // generate a new express app and call it 'app'
 
 
@@ -44,7 +46,15 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/events", events);
+
+
+
+
+
+
 const port = process.env.PORT || 3001;
+
+
 
 app.listen(port, () => console.log(`Server started in port ${port}`))
 
