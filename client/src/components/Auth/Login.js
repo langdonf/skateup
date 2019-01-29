@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider'
@@ -39,7 +38,7 @@ class LogModal extends React.Component {
             email: "",
             password: "",
             openLog: false,
-            errors: {}
+            errors: [{email:"",password:""}]
         };
     }
 
@@ -62,7 +61,10 @@ class LogModal extends React.Component {
             
         })
         .catch(function (error) {
-           console.log(error);
+            let validation = error.response.data
+           ths.setState({
+               errors: [validation]
+           })
         })
     }
 
@@ -81,7 +83,7 @@ class LogModal extends React.Component {
             className="modal"
             >
             <div  className={classes.paper}>
-            {/* <ValidatorForm className={classes.container} >
+            <form className={classes.container} >
             
             <TextField
                 id="email"
@@ -92,10 +94,11 @@ class LogModal extends React.Component {
                 name="email"
                 margin="normal"
                 variant="outlined"
+                helperText={this.state.errors[0].email}
              
                 
             />
-            <TextValidator
+            <TextField
                 id="password"
                 label="Password"
                 className={classes.textField}
@@ -104,30 +107,14 @@ class LogModal extends React.Component {
                 name="password"
                 margin="normal"
                 variant="outlined"
-                validators={['required', 'isEmail']}
-                    errorMessages={['this field is required', 'email is not valid']}
+                helperText={this.state.errors[0].password}
             />
             
             <br /> <br />
             
             <Divider style={{ margin: '20px 0' }} />
             <Button variant="raised" color="primary" onClick={this.submit}  >Submit</Button>
-            </ValidatorForm> */}
-
-            <ValidatorForm
-                ref="form"
-                onSubmit={this.handleSubmit}
-                onError={errors => console.log(errors)}
-            >
-                <TextValidator
-                    label="Email"
-                    onChange={this.handleChange}
-                    name="email"
-                    validators={['required', 'isEmail']}
-                    errorMessages={['this field is required', 'email is not valid']}
-                />
-                <Button type="submit">Submit</Button>
-            </ValidatorForm>
+            </form>
                 <LogModalWrapped />
             </div>
             </Modal>

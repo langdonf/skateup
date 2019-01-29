@@ -7,14 +7,14 @@ import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider'
 import axios from 'axios'
 import uuidv4 from 'uuid/v4';
-
+import APIKey from '../../constants'
 
 
 
 const styles = theme => ({
     paper: {
         position: 'absolute',
-        top: "20%",
+        top: "10%",
         right: "40%",
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
@@ -44,7 +44,7 @@ class RegModal extends React.Component {
             onSubmitValues: null,
             open: false,
             isLoggedin: false,
-            errors: {}
+            errors: [{email:"",password:""}]
         };
     }
     addRow = () => {
@@ -52,6 +52,32 @@ class RegModal extends React.Component {
         rows.push({ _id: uuidv4() })
         this.setState({ rows })
         }
+        handleFuckMaps = e => {
+            var ths = this;
+            axios
+              .post(
+                `https://maps.googleapis.com/maps/api/geocode/json?address=${
+                  e.target.value
+                }&key=${APIKey.APIKey}`
+              )
+              .then(function(response) {
+                console.log(response);
+                ths.setState({
+                  startPoint: {
+                    lat: response.data.results[0].geometry.location.lat,
+                    lng: response.data.results[0].geometry.location.lng
+                  },
+                  formatted: response.data.results[0].formatted_address
+        
+                  
+        
+                });
+                // .catch(function (error) {
+                //   console.log(error);
+                // }
+                // );
+              });
+          };
 
     removeRow = (index) => {
         const { rows } = this.state
@@ -78,7 +104,7 @@ class RegModal extends React.Component {
         
     }
     submit = (e) => {
-        
+        e.preventDefault()
         const newUser = {
             username: this.state.username,
             email: this.state.email,
@@ -95,7 +121,10 @@ class RegModal extends React.Component {
             ths.submitSuccess(newUser)   
         })
         .catch(function (error) {
-            console.log(error);
+            let validation = error.response.data
+           ths.setState({
+               errors: [validation]
+           })
         })
 
         
@@ -112,7 +141,7 @@ class RegModal extends React.Component {
     
     render() {
         const { classes } = this.props;
-        const { errors } = this.state;
+        
         return (
             <Modal
             aria-labelledby="simple-modal-title"
@@ -131,7 +160,7 @@ class RegModal extends React.Component {
                 onChange={this.onChange}
                 margin="normal"
                 variant="outlined"
-                error={errors.name}
+                helperText={this.state.errors[0].username}
             />
             <TextField
                 id="email"
@@ -142,7 +171,7 @@ class RegModal extends React.Component {
                 name="email"
                 margin="normal"
                 variant="outlined"
-                error={errors.email}
+                helperText={this.state.errors[0].email}
             />
             <TextField
                 id="password"
@@ -151,8 +180,8 @@ class RegModal extends React.Component {
                 onChange={this.onChange}
                 type="password"
                 margin="normal"
-                error={errors.password}
                 variant="outlined"
+                helperText={this.state.errors[0].password}
             />
             <TextField
                 id="password2"
@@ -160,9 +189,9 @@ class RegModal extends React.Component {
                 className={classes.textField}
                 onChange={this.onChange}
                 type="password"
-                error={errors.password2}
                 margin="normal"
                 variant="outlined"
+                helperText={this.state.errors[0].password2}
             />
             <TextField
                 id="hometown"
@@ -172,6 +201,7 @@ class RegModal extends React.Component {
                 type="text"
                 margin="normal"
                 variant="outlined"
+                
             />
             {this.state.rows.map((row, i) => (
                 <div key={row._id}>
