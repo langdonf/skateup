@@ -63,10 +63,7 @@ class RegModal extends React.Component {
               .then(function(response) {
                 console.log(response);
                 ths.setState({
-                  startPoint: {
-                    lat: response.data.results[0].geometry.location.lat,
-                    lng: response.data.results[0].geometry.location.lng
-                  },
+                 
                   formatted: response.data.results[0].formatted_address
         
                   
@@ -110,7 +107,7 @@ class RegModal extends React.Component {
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2,
-            hometown: this.state.hometown,
+            hometown: this.state.formatted,
             boards: this.state.boards
             };
 
@@ -198,9 +195,11 @@ class RegModal extends React.Component {
                 label="Hometown"
                 className={classes.textField}
                 onChange={this.onChange}
+                onBlur={this.handleFuckMaps}
                 type="text"
                 margin="normal"
                 variant="outlined"
+                helperText={this.state.formatted}
                 
             />
             {this.state.rows.map((row, i) => (

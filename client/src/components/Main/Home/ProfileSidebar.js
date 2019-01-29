@@ -80,7 +80,7 @@ class ProfileSidebar extends React.Component{
                     </Grid>
                 <Divider  />
                 <Typography className={classes.profile} color="secondary" variant="h5"  >
-                <i class="fas fa-map-marker-alt"></i> Hometown:
+                <i className="fas fa-map-marker-alt"></i> Hometown:
 
                 </Typography>
                 <Typography className={classes.profile} color="secondary" align="right" variant="h5"  component="h2">
