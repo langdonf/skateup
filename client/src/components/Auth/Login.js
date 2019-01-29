@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider'
@@ -22,6 +23,11 @@ const styles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
     },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+      }
     });
 
 
@@ -32,7 +38,8 @@ class LogModal extends React.Component {
         this.state = {
             email: "",
             password: "",
-            openLog: false
+            openLog: false,
+            errors: {}
         };
     }
 
@@ -44,7 +51,7 @@ class LogModal extends React.Component {
             };
 
         
-    
+        var ths = this
         axios.post('http://localhost:3001/api/users/login', user)
         .then(function (response) {
             console.log(response)
@@ -55,7 +62,7 @@ class LogModal extends React.Component {
             
         })
         .catch(function (error) {
-            console.log("Username not found, please try again.");
+           console.log(error);
         })
     }
 
@@ -74,7 +81,7 @@ class LogModal extends React.Component {
             className="modal"
             >
             <div  className={classes.paper}>
-            <form validate className={classes.container} autoComplete="on">
+            {/* <ValidatorForm className={classes.container} >
             
             <TextField
                 id="email"
@@ -83,26 +90,44 @@ class LogModal extends React.Component {
                 onChange={this.onChange}
                 type="email"
                 name="email"
-                autoComplete="email"
                 margin="normal"
                 variant="outlined"
+             
+                
             />
-            <TextField
+            <TextValidator
                 id="password"
                 label="Password"
                 className={classes.textField}
                 onChange={this.onChange}
                 type="password"
-                autoComplete="current-password"
+                name="password"
                 margin="normal"
                 variant="outlined"
+                validators={['required', 'isEmail']}
+                    errorMessages={['this field is required', 'email is not valid']}
             />
             
             <br /> <br />
             
             <Divider style={{ margin: '20px 0' }} />
             <Button variant="raised" color="primary" onClick={this.submit}  >Submit</Button>
-            </form>
+            </ValidatorForm> */}
+
+            <ValidatorForm
+                ref="form"
+                onSubmit={this.handleSubmit}
+                onError={errors => console.log(errors)}
+            >
+                <TextValidator
+                    label="Email"
+                    onChange={this.handleChange}
+                    name="email"
+                    validators={['required', 'isEmail']}
+                    errorMessages={['this field is required', 'email is not valid']}
+                />
+                <Button type="submit">Submit</Button>
+            </ValidatorForm>
                 <LogModalWrapped />
             </div>
             </Modal>

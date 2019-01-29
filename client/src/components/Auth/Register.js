@@ -122,13 +122,13 @@ class RegModal extends React.Component {
             className="modal"
             >
             <div  className={classes.paper}>
-            <form noValidate className={classes.container} autoComplete="on">
+            <form className={classes.container} >
             <TextField
                 id="username"
+                name="username"
                 label="Username"
                 className={classes.textField}
                 onChange={this.onChange}
-                autoComplete="current-username"
                 margin="normal"
                 variant="outlined"
                 error={errors.name}
@@ -138,7 +138,6 @@ class RegModal extends React.Component {
                 label="Email"
                 className={classes.textField}
                 onChange={this.onChange}
-                autoComplete="current-username"
                 type="email"
                 name="email"
                 margin="normal"
@@ -151,7 +150,6 @@ class RegModal extends React.Component {
                 className={classes.textField}
                 onChange={this.onChange}
                 type="password"
-                autoComplete="current-password"
                 margin="normal"
                 error={errors.password}
                 variant="outlined"
@@ -163,7 +161,6 @@ class RegModal extends React.Component {
                 onChange={this.onChange}
                 type="password"
                 error={errors.password2}
-                autoComplete="current-password"
                 margin="normal"
                 variant="outlined"
             />
