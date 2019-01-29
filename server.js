@@ -12,12 +12,13 @@ const multer = require('multer')
 
 
 // serve static files in public
+app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({ 
-    extended: false
+    extended: true
   })
 );
-app.use(bodyParser.json());
+
 app.use(express.static('public'))
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,6 +30,8 @@ app.use(cors())
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/client/public/index.html');
 })
+
+app.use('/uploads', express.static('uploads'))
 //DB Config
 const db = require('./config/keys').mongoURI;
 

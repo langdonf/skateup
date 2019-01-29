@@ -18,13 +18,12 @@ const styles = theme => ({
 
 function Profile(props) {
     const { classes } = props;
-
     return (
         <div className={classes.root} style={style}>
             <Grid container spacing={24}>
                 <MyEvents />
-                <EventsAttending />
                 <ProfileSidebar />
+                <EventsAttending /> 
             </Grid>
         </div>
     );

@@ -14,6 +14,8 @@ import uuidv4 from 'uuid/v4';
 const styles = theme => ({
     paper: {
         position: 'absolute',
+        top: "20%",
+        right: "40%",
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
@@ -41,7 +43,8 @@ class RegModal extends React.Component {
             rows: [{ _id: uuidv4() }],
             onSubmitValues: null,
             open: false,
-            isLoggedin: false
+            isLoggedin: false,
+            errors: {}
         };
     }
     addRow = () => {
@@ -109,34 +112,38 @@ class RegModal extends React.Component {
     
     render() {
         const { classes } = this.props;
+        const { errors } = this.state;
         return (
             <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={this.props.open}
             onClose={this.props.handleClose}
+            className="modal"
             >
             <div  className={classes.paper}>
-            <form className={classes.container} autoComplete="on">
+            <form noValidate className={classes.container} autoComplete="on">
             <TextField
                 id="username"
                 label="Username"
                 className={classes.textField}
                 onChange={this.onChange}
-                autoComplete="current-password"
+                autoComplete="current-username"
                 margin="normal"
                 variant="outlined"
+                error={errors.name}
             />
             <TextField
                 id="email"
                 label="Email"
                 className={classes.textField}
                 onChange={this.onChange}
-                autoComplete="current-password"
+                autoComplete="current-username"
                 type="email"
                 name="email"
                 margin="normal"
                 variant="outlined"
+                error={errors.email}
             />
             <TextField
                 id="password"
@@ -146,6 +153,7 @@ class RegModal extends React.Component {
                 type="password"
                 autoComplete="current-password"
                 margin="normal"
+                error={errors.password}
                 variant="outlined"
             />
             <TextField
@@ -154,6 +162,7 @@ class RegModal extends React.Component {
                 className={classes.textField}
                 onChange={this.onChange}
                 type="password"
+                error={errors.password2}
                 autoComplete="current-password"
                 margin="normal"
                 variant="outlined"

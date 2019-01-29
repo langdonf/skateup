@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
@@ -8,9 +7,10 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
-
+import backURL from '../../../constants'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const styles = theme => ({
@@ -58,13 +58,13 @@ class MyEvents extends React.Component{
                 </GridListTile>
                 {this.state.myEvents.map(tile => (
                 <GridListTile key={tile.start.lat}>
-                    <img src={tile.photo} alt={tile.title} />
+                    <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
                     <GridListTileBar
                     title={tile.title}
-                    subtitle={<span>in: {tile.hometown}</span>}
+                    subtitle={<span>in: {tile.city}</span>}
                     actionIcon={
                         <IconButton className={classes.icon}>
-                  <InfoIcon />
+                  <InfoIcon   component={Link} to={`/eventDetail/${tile._id}`} />
                 </IconButton>
               }
             />

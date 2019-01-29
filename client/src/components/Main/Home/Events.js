@@ -10,6 +10,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
+import backURL from '../../../constants'
+import { Link } from "react-router-dom";
 
 
 const styles = theme => ({
@@ -31,20 +33,26 @@ const styles = theme => ({
     },
 });
 
+
+
 class Events extends React.Component{
     constructor(props){
         super(props)
         this.state = { 
             openMap: false,
             events: [], 
+            event: ''
+
         }
+
     }
     
+   
     componentDidMount(){
         
         Axios.get('http://localhost:3001/api/events/all')
         .then(response => {
-            console.log(response.data)
+            // console.log(response.data)
             this.setState ({
                 events: response.data
             })
@@ -58,13 +66,13 @@ class Events extends React.Component{
         
         let allEvents = this.state.events.map(tile => (
             <GridListTile key={tile.start.lat}>
-            <img src={tile.photo} alt={tile.title} />
-                <GridListTileBar
+            <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
+                <GridListTileBar id={tile._id}
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}
                     actionIcon={
-                <IconButton onClick={this.handleMapOpen} className={classes.icon}>
-                    <InfoIcon />
+                <IconButton className={classes.icon}>
+                    <InfoIcon   component={Link} to={`/eventDetail/${tile._id}`} />
                 </IconButton>
             }
                 />

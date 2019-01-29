@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from './components/Header/Nav'
 
 import Profile from './containers/Profile'
-
+import Detail from './containers/Detail'
 import Home from "./containers/Home"
 import Index from "./containers/Index"
 
@@ -29,6 +29,7 @@ class App extends Component {
             <Route exact path="/"  component={Index} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/eventDetail/:eventId" component={Detail} />
         </div>
       </Router>
     );

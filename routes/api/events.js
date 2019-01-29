@@ -3,32 +3,37 @@ const router = express.Router();
 const Event = require("../../models/Events");
 const keys = require("../../config/keys");
 const multer = require(`multer`);
+
+
 var storage = multer.diskStorage({
         destination: function (req, file, cb) {
-          cb(null, '/uploads')
+          cb(null, 'uploads')
         },
         filename: function (req, file, cb) {
-          cb(null, file.fieldname + '-' + Date.now())
+          cb(null, file.fieldname + '-' + Date.now()+'.jpg')
         }
       })
-var upload = multer({ storage: storage })
+       
+      var upload = multer({ storage: storage })
 
 
 
 router.post("/newevent", upload.single('photo'), (req, res, next) => {
-        // console.log(req.body);
+        console.log(req.body);
         let userId = req.body.userId
-        let eventform = req.body.newEvent
+        let eventform = req.body
         console.log("req.file:", req.file);
         let photo = req.file
-        eventform.photo = photo
+        eventform.start = {lat: req.body.startLat, lng: req.body.startLng}
+        eventform.photo = photo.path
         eventform.owner = userId
         
         const newEvent = new Event(eventform)
         .save()
         .then(event => res.json(event))
-    
         })
+
+
 router.get("/user/:id", (req, res)=>{
         Event.find({owner:req.params.id})
         .exec(function (err, data) {
@@ -44,6 +49,23 @@ router.get("/user/:id", (req, res)=>{
                 }
         })
 })
+
+router.get("/detail/:id", (req, res)=>{
+        Event.find({_id:req.params.id})
+        .exec(function (err, data) {
+                if (err) {
+                        res.json({
+                        "error": err
+                        })
+                } else {
+                        console.log(data);
+                        res.json({
+                        data
+                        })
+                }
+        })
+})
+
 
 router.get("/all", (req, res) => {
         Event.find({})

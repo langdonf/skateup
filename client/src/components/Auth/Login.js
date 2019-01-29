@@ -14,7 +14,9 @@ import axios from 'axios'
 const styles = theme => ({
     paper: {
         position: 'absolute',
-        width: theme.spacing.unit * 50,
+        top: "20%",
+        right: "40%",
+        width: theme.spacing.unit * 40,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -53,7 +55,7 @@ class LogModal extends React.Component {
             
         })
         .catch(function (error) {
-            console.log(error);
+            console.log("Username not found, please try again.");
         })
     }
 
@@ -69,9 +71,10 @@ class LogModal extends React.Component {
             aria-describedby="simple-modal-description"
             open={this.props.open}
             onClose={this.props.handleClose}
+            className="modal"
             >
             <div  className={classes.paper}>
-            <form className={classes.container} autoComplete="off">
+            <form validate className={classes.container} autoComplete="on">
             
             <TextField
                 id="email"
