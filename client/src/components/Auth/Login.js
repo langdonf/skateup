@@ -53,7 +53,7 @@ class LogModal extends React.Component {
         var ths = this
         axios.post('http://localhost:3001/api/users/login', user)
         .then(function (response) {
-            console.log(response)
+           
             let token = response.data.token
             localStorage.token = token
             localStorage.userId = response.data.userData.id

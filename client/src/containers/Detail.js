@@ -7,108 +7,373 @@ import backURL from '../constants'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
 import Button from "@material-ui/core/Button";
+import Map from '../components/Main/Map/Map';
+import TextField from "@material-ui/core/TextField";
+import Divider from "@material-ui/core/Divider";
+import DateFnsUtils from "@date-io/date-fns";
+import Modal from "@material-ui/core/Modal";
+import APIKey from '../constants'
+import {
+	MuiPickersUtilsProvider,
+	TimePicker,
+	DatePicker
+} from "material-ui-pickers";
 
-
+var moment = require('moment');
 const style = {paddingTop: 120}
 const styles = theme => ({
     root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing.unit * 4,
-      margin: theme.spacing.unit * 4,
-    
-    },
-    image: {
-     
-      height:350,
-    },
-    img: {
-      margin: 'auto',
-      display: 'block',
-      maxWidth: '100%',
-      maxHeight: '100%',
-    },
-  });
+		flexGrow: 1,
+		},
+		image: {
+		height:350,
+		},
+		img: {
+		margin: 'auto',
+		display: 'block',
+		maxWidth: '100%',
+		align: "center"
+		},
+		paper: {
+		position: "absolute",
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		margin: theme.spacing.unit * 4,
+		outline: "none"
+		},
+		textField: {
+		margin: 10
+		}
+	});
 
 class Detail extends React.Component{
     constructor(props){
         super(props)
         this.state = { 
             eventDetails: {}, 
-        }
-    }
-   
+            title: "",
+            city: "",
+			details: "",
+			disabled: false,
+		
+            
+            }
+	}
+    onChange = e => {
+    	this.setState({ [e.target.id]: e.target.value });
+    };
+    
     componentDidMount(){
-   
-       let eventId = this.props.match.params.eventId;
-       
-        Axios.get(`http://localhost:3001/api/events/detail/${eventId}`)
-        .then(response => {
-           
-            this.setState ({
-                eventDetails: response.data.data[0]
-            })
-        })
-    }
-    delete=()=>{
-      let eventId = this.props.match.params.eventId;
-      Axios.delete(`http://localhost:3001/api/events/delete/${eventId}`)
-        .then(response => {
-        window.location="/profile"
-        })
-    }
+		var user =''
+		let eventId = this.props.match.params.eventId;
+		Axios.get(`http://localhost:3001/api/events/detail/${eventId}`)
+		.then(response => {
+			console.log(response);
+			user = response.data.data[0].owner;
+			
+			this.handleUser(user)
+			this.setState ({
+				eventDetails: response.data.data[0],
+				title: response.data.data[0].title,
+				city: response.data.data[0].city,
+				details: response.data.data[0].details,
+				date: response.data.data[0].date
+
+		})
+		if (response.data.data[0].participant.includes(localStorage.getItem('userId'))){
+			this.setState({
+				disabled: true
+			})
+		} 
+			
+		
+    })
+}
+
+    handleUser=(user)=>{
+		Axios.get(`http://localhost:3001/api/users/${user}`)
+		.then(response => {
+			console.log(response);
+			this.setState({
+			user: response.data.data.username
+			})
+		}).catch(error=>{
+			console.log(error);
+		})
+		}
+	delete=()=>{
+		let eventId = this.props.match.params.eventId;
+		Axios.delete(`http://localhost:3001/api/events/delete/${eventId}`)
+			.then(response => {
+			window.location="/profile"
+			})
+		}
+		handleEditOpen = () => {
+			var ths = this
+			var lat = this.state.eventDetails.start.lat
+			var lng = this.state.eventDetails.start.lng
+			Axios
+			.post(
+				`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${APIKey.APIKey}`
+			)
+			.then(function(response) {
+				console.log(response);
+				ths.setState({
+				startName: response.data.results[0].formatted_address
+				});
+				// .catch(function (error) {
+				//   console.log(error);
+				// }
+				// );
+			});  
+			this.setState({ openEdit: true });
+			};
+		
+			handleEditClose = () => {
+			this.setState({ openEdit: false });
+		};
+		
+	edit=()=>{
+		let toSend = {
+                "title": this.state.title,
+                "details": this.state.details,
+				"city": this.state.city,
+				"start": {lat: this.state.eventDetails.start.lat,
+					lng: this.state.eventDetails.start.lng},
+				"date": this.state.selectedDate
+		}
+		let eventId = this.props.match.params.eventId
+		
+		Axios.post(`http://localhost:3001/api/events/edit/${eventId}`, toSend).then( response => {
+			window.location=`/profile`
+		}
+			
+		)
+	}
+
+	handleAttend=()=>{
+		
+		var eventId = this.props.match.params.eventId
+		var userId = localStorage.getItem('userId');
+		Axios.post(`http://localhost:3001/api/events/attend/${userId}/${eventId}`).then(response => {
+			
+			
+			
+		})
+	}
+
+	handleDateChange = date => {
+		this.setState({ selectedDate: date });
+	};
+
+    handleFuckMaps = e => {
+		var ths = this;
+		Axios
+			.post(
+			`https://maps.googleapis.com/maps/api/geocode/json?address=${
+				e.target.value
+			}&key=${APIKey.APIKey}`
+			)
+			.then(function(response) {
+			console.log(response);
+			ths.setState({
+				eventDetails: {
+					start: {
+				lat: response.data.results[0].geometry.location.lat,
+				lng: response.data.results[0].geometry.location.lng
+				}},
+				formatted: response.data.results[0].formatted_address
+	
+            
+
+			})
+			.catch(function (error) {
+			  console.log(error);
+			}
+			);
+		});
+    };
     
     
     render(){
+		const { selectedDate } = this.state;
         const { classes } = this.props;
+        var start = this.state.startName
         var deets = this.state.eventDetails
-       
         var deleteButton = []
         if (window.localStorage.getItem('userId') === deets.owner){
-          deleteButton.push(<Button key={0} onClick={this.delete} color="primary" >
-          Cancel Event
+			deleteButton.push(<Button key={0} onClick={this.delete} color="primary" > 
+			Cancel Event
+			</Button>, <Button key={1} onClick={this.handleEditOpen} color="primary" > 
+			Edit Event Details
         </Button>)
         }
         if( Object.entries(this.state.eventDetails).length > 0){
             
             return (
-                <div style={style} className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={16}>
-          <Grid item>
-           
-              <img className={classes.img} src={`${backURL.backURL}${deets.photo}`} alt={deets.title}  />
-       
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid item xs container direction="column" spacing={16}>
-              <Grid item xs>
-                <Typography gutterBottom variant="h3">
-                  {deets.title}
-                </Typography>
-                <Typography  variant="h5"gutterBottom>{deets.city}  --- Date: {deets.date.substring(0,10)}</Typography>
-                <Typography variant="h6" >{deets.details}</Typography>
-                <Typography align="right" variant="subtitle1">Hosted by: {deets.owner}</Typography>
-                {deleteButton}
-              </Grid>
-              
-            </Grid>
-            
-          </Grid>
-        </Grid>
-      </Paper>
-    </div>
+<div style={style} className={classes.root}>
+<Paper className={classes.paper}>
+	<Grid container spacing={16}>
+		<Grid item xs={8}>
+			<Typography align="center" gutterBottom variant="h3">
+			{deets.title}
+			</Typography> 
+			<img className={classes.img} src={`${backURL.backURL}${deets.photo}`} alt={deets.title}  />
+		</Grid>
+		<Grid item xs={4}>
+			
+				<Typography variant="h5" gutterBottom>
+					In {deets.city} on 
+					<br/>
+					{moment(deets.date).format("dddd, MMM Do hh:mm A")}
+				</Typography>
+				
+				<Typography variant="h6" >
+					{deets.details}
+				</Typography>
+				<Typography align="right" variant="subtitle1">
+					Hosted by: {this.state.user}
+				</Typography>
+				{deleteButton}
+				<Button 
+					justify="flex-end" 
+					key={4} 
+					onClick={this.handleAttend} 
+					color="primary" 
+					disabled={this.state.disabled}
+					>Attend Event
+				</Button>
+			
+		</Grid>
+			<Grid item xs container direction="column" spacing={16}>
+				
+
+
+			</Grid>
+			<Map
+			id="myMap"
+			options={{
+			center: { lat: this.state.eventDetails.start.lat, lng: this.state.eventDetails.start.lng },
+			zoom: 14
+			}}
+			onMapLoad={map => {
+			var marker = new window.google.maps.Marker({
+			position: { lat:this.state.eventDetails.start.lat, lng:this.state.eventDetails.start.lng  },
+			map: map,
+			title: deets.title
+			});
+			}}
+			/>
+		
+	</Grid>
+</Paper>
+<Modal
+aria-labelledby="simple-modal-title"
+aria-describedby="simple-modal-description"
+open={this.state.openEdit}
+onClose={this.handleEditClose}
+
+>
+<div
+style={{ alignItems: "center", justifyContent: "center" }}
+className={classes.paper}
+>
+<MuiPickersUtilsProvider utils={DateFnsUtils}>
+<form
+encType="multipart/form-data"
+className={classes.container}
+autoComplete="on"
+>
+<TextField
+id="title"
+label="Event Title"
+className={classes.textField}
+onChange={this.onChange}
+
+margin="normal"
+defaultValue={this.state.eventDetails.title}
+variant="outlined"
+fullWidth={true}
+/>
+
+<TextField
+id="city"
+label="City"
+className={classes.textField}
+onChange={this.onChange}
+onBlur={this.handleCity}
+defaultValue={this.state.eventDetails.city}
+
+type="text"
+variant="outlined"
+fullWidth={true}
+helperText={this.state.city}
+/>
+<TextField
+id="startPoint"
+label="Start Address"
+className={classes.textField}
+onBlur={this.handleFuckMaps}
+defaultValue={start}
+type="text"
+variant="outlined"
+fullWidth={true}
+helperText={this.state.formatted}
+/>
+
+
+<TextField
+id="details"
+label="Details"
+multiline
+rowsMax="8"
+onChange={this.onChange}
+defaultValue={this.state.eventDetails.details}
+className={classes.textField}
+margin="normal"
+fullWidth={true}
+/>
+<Grid
+container
+className={classes.grid}
+justify="space-around"
+>
+<DatePicker
+margin="normal"
+label="Date picker"
+value={selectedDate}
+onChange={this.handleDateChange}
+/>
+<TimePicker
+margin="normal"
+label="Time picker"
+value={selectedDate}
+onChange={this.handleDateChange}
+/>
+</Grid>
+
+
+<Divider style={{ margin: "20px 0" }} />
+<Button
+variant="raised"
+color="primary"
+onClick={this.edit}
+>
+Submit
+</Button>
+</form>
+</MuiPickersUtilsProvider>
+</div>
+</Modal>
+</div>
             );
         }else{
             return(
                 <div></div>
             )
         }
-        
-}
-        
-    
+  }
 }
     
 Detail.propTypes = {

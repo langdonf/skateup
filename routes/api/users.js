@@ -9,6 +9,8 @@ const validateLoginInput = require("../../Validation/login");
 // Load User model
 const User = require("../../models/User");
 const getIdFromToken = require("../../config/passport")
+const multer = require(`multer`);
+
 
 // @route POST api/users/register
 // @desc Register user
@@ -63,7 +65,23 @@ router.post("/login", (req, res) => {
         });
     });
 })
-
+router.put('/edit/:id',(req, res)=>{
+    User.findByIdAndUpdate({
+        _id: req.params.id
+    },req.body, {new: true})
+        .exec(function (err, data){
+            if (err){
+                    res.json({
+                            "error": err
+                    })
+            } else {
+                    console.log(data);
+                    res.json({
+                    data
+                    })
+            }
+    })
+})
 router.post("/register", (req, res) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);

@@ -8,7 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
-
+import Axios from "axios";
+import backURL from '../../../constants'
+import { Link } from "react-router-dom";
 
 const styles = theme => ({
     root: {
@@ -27,6 +29,22 @@ class eventsAttending extends React.Component{
             eventsAttending: []
         }
     }
+    componentDidMount(){
+        var ths = this
+        var userId = localStorage.getItem('userId')
+        
+        Axios.get(`http://localhost:3001/api/events/attending/${userId}`)
+        .then(response => {
+			console.log(response);
+			
+			
+			
+			ths.setState ({eventsAttending: response.data.data})
+		
+			
+		
+    })
+    }
     render(){
     const { classes } = this.props;
 
@@ -39,13 +57,13 @@ class eventsAttending extends React.Component{
                 </GridListTile>
                 {this.state.eventsAttending.map(tile => (
                 <GridListTile key={tile.start.lat}>
-                    <img src={tile.photo} alt={tile.title} />
+                    <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
                     <GridListTileBar
                     title={tile.title}
-                    subtitle={<span>in: {tile.hometown}</span>}
+                    subtitle={<span>in: {tile.city}</span>}
                     actionIcon={
                         <IconButton className={classes.icon}>
-                  <InfoIcon />
+                    <InfoIcon   component={Link} to={`/eventDetail/${tile._id}`} />
                 </IconButton>
               }
             />

@@ -14,6 +14,7 @@ import backURL from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
 
+
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
@@ -31,50 +32,96 @@ const styles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
     },
-    icon:{
-        color: "primary"
-    }
-    
 });
 
-class Events extends React.Component{
+
+
+class LocalEvents extends React.Component{
     constructor(props){
         super(props)
         this.state = { 
             openMap: false,
-            events: [], 
+            localEvents: [], 
             event: ''
-        }
-    }
 
+        }
+
+    }
+    
+   
     componentDidMount(){
-        Axios.get('http://localhost:3001/api/events/all')
-        .then(response => {
+        
+        
+        var id = localStorage.getItem('userId')
+        Axios.get(`http://localhost:3001/api/users/${id}`)
+			.then(response => {
+                
+                var home = response.data.data.hometown;
+                
+                this.handleLocalEvents(home)
+			})
+        
+    }
+    handleLocalEvents=(home)=>{
+        var ths = this
+        Axios.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${home}&key=${APIKey}`)
+			.then(function(response) {
+				ths.setState({
+					home: {
+						lat: response.data.results[0].geometry.location.lat,
+						lng: response.data.results[0].geometry.location.lng
+					},
+
+					
+
+                });
+               
+                
+                ths.handleRange()
+                
+				// .catch(function (error) {
+				//  
+				// }
+				// );
+            }
             
-            this.setState ({
-                events: response.data
-            })
-        })
+            );
+            
+        
+    }
+    handleRange=()=>{
+        var ths = this
+        Axios.get(`http://localhost:3001/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
+                .then(response => {
+               
+                    ths.setState ({
+                        localEvents: response.data
+                    })
+                    
+                })
     }
 
     render(){
         const { classes } = this.props;
-        let allEvents = this.state.events.map(tile => (
+        
+        let allEvents = this.state.localEvents.map(tile => (
             <GridListTile key={tile.start.lat}>
             <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
                 <GridListTileBar id={tile._id}
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}
                     actionIcon={
-                        <IconButton color="primary"  className={classes.icon}>
-                            <InfoIcon  color="primary" component={Link} to={`/eventDetail/${tile._id}`} />
-                        </IconButton>}/>
-                </GridListTile>
+                <IconButton className={classes.icon}>
+                    <InfoIcon   component={Link} to={`/eventDetail/${tile._id}`} />
+                </IconButton>
+            }
+                />
+            </GridListTile>
         ))
         
         
         return (
-            <Grid>
+            <Grid item xs={8}>
                 <Paper className={classes.root} elevation={1}>
                     <GridList cellHeight={180} className={classes.gridList}>
                         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
@@ -93,8 +140,8 @@ class Events extends React.Component{
     
 }
     
-Events.propTypes = {
+LocalEvents.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Events);
+export default withStyles(styles)(LocalEvents);

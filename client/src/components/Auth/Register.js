@@ -61,10 +61,10 @@ class RegModal extends React.Component {
                 }&key=${APIKey.APIKey}`
               )
               .then(function(response) {
-                console.log(response);
+                
                 ths.setState({
                  
-                  formatted: response.data.results[0].formatted_address
+                  hometown: response.data.results[0].formatted_address
         
                   
         
@@ -94,7 +94,7 @@ class RegModal extends React.Component {
             }
     })
         .catch(function(error){
-            console.log(error);
+            
         })
 
         
@@ -107,14 +107,14 @@ class RegModal extends React.Component {
             email: this.state.email,
             password: this.state.password,
             password2: this.state.password2,
-            hometown: this.state.formatted,
+            hometown: this.state.hometown,
             boards: this.state.boards
             };
 
         var ths = this
         axios.post('http://localhost:3001/api/users/register', newUser)
         .then(function (response) {
-            console.log(response)
+           
             ths.submitSuccess(newUser)   
         })
         .catch(function (error) {
@@ -199,7 +199,7 @@ class RegModal extends React.Component {
                 type="text"
                 margin="normal"
                 variant="outlined"
-                helperText={this.state.formatted}
+                helperText={this.state.hometown}
                 
             />
             {this.state.rows.map((row, i) => (

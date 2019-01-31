@@ -6,11 +6,12 @@ import Paper from '@material-ui/core/Paper';
 import axios from 'axios'
 import Grid from '@material-ui/core/Grid'
 import { Divider } from "@material-ui/core";
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import uuidv4 from 'uuid/v4';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Axios from "axios";
+import APIKey from '../../../constants'
 var moment = require('moment');
 
 const styles = theme => ({
@@ -20,6 +21,14 @@ const styles = theme => ({
         paddingBottom: theme.spacing.unit * 2,
         
     },
+    paper: {
+		position: "absolute",
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		margin: theme.spacing.unit * 4,
+		outline: "none"
+		},
     bigAvatar: {
         margin: 10,
         width: 60,
@@ -36,6 +45,11 @@ const styles = theme => ({
     
       
 });
+const inputStyle = {
+    marginRight: '20px',
+    width: '450px',
+    padding: "10px"
+  }
 
 
 class ProfileSidebar extends React.Component{
@@ -46,9 +60,53 @@ class ProfileSidebar extends React.Component{
             userId: "",
             hometown: "",
             boards: [],
-            joinDate: ""
+            joinDate: "",
+            rows: [{ _id: uuidv4() }],
             }
         }
+        handleEditOpen = () => { 
+            var userId = localStorage.getItem('userId')
+            Axios.get()
+            this.setState({ openEdit: true });
+            };
+        addRow = () => {
+            const { rows } = this.state
+            rows.push({ _id: uuidv4() })
+            this.setState({ rows })
+            }
+        addBoard = (e) => {
+            const { boards } = this.state
+            boards.push(e.target.value)
+            this.setState({ boards })
+            }
+        removeRow = (index) => {
+            const { boards } = this.state
+            if (boards.length > 1) {
+                boards.splice(index, 1)
+                this.setState({ boards })
+            }
+            }
+        submit = () => {
+            let updated = {
+                "username": this.state.username,
+                "hometown": this.state.hometown,
+				"boards": this.state.boards,
+				
+            }
+            let userId = localStorage.getItem('userId')
+            
+            Axios.put(`http://localhost:3001/api/users/edit/${userId}`, updated).then( response => {
+                window.location=`/profile`
+            }
+                
+            )
+        }
+        handleEditClose = () => {
+            this.setState({ openEdit: false });
+        };
+        onChange = (e) => {
+            this.setState({ [e.target.id]: e.target.value });
+            };
         componentDidMount=()=>{
         let id = localStorage.getItem('userId')
 		axios.get(`http://localhost:3001/api/users/${id}`)
@@ -78,7 +136,7 @@ class ProfileSidebar extends React.Component{
                     {this.state.username}
                     </Typography>
                     </Grid>
-                <Divider  />
+                <Divider />
                 <Typography className={classes.profile} color="secondary" variant="h5"  >
                 <i className="fas fa-map-marker-alt"></i> Hometown:
 
@@ -111,8 +169,73 @@ class ProfileSidebar extends React.Component{
 
 
                 <Divider/>
-
+                <Button key={1} onClick={this.handleEditOpen} color="primary" > 
+			Edit Profile Details
+        </Button>
                 </Paper>
+                
+                    <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.openEdit}
+                    onClose={this.handleEditClose}
+
+                    >
+
+                    <div  className={classes.paper}>
+                    <form className={classes.container} >
+                    <TextField
+                    id="username"
+                    name="username"
+                    label="Username"
+                    className={classes.textField}
+                    onChange={this.onChange}
+                    margin="normal"
+                    variant="outlined"
+                    defaultValue={this.state.username}
+
+                    />
+
+                    <TextField
+                    id="hometown"
+                    label="Hometown"
+                    className={classes.textField}
+                    onChange={this.onChange}
+                    onBlur={this.handleFuckMaps}
+                    type="text"
+                    margin="normal"
+                    variant="outlined"
+                    defaultValue={this.state.hometown}
+
+
+                    />
+                    {this.state.boards.map((row, i) => (
+                <div key={row._id}>
+                <TextField
+                    label="Board Type"
+                    id="boards"
+                    variant="outlined"
+                    style={inputStyle}
+                    onBlur={this.addBoard}
+                    defaultValue={this.state.boards[i]}
+                />
+                <Button
+                    onClick={() => this.removeRow(i)}
+                    deletefieldrow={`rows[${i}]`}
+                    >
+                    Remove Board
+                    </Button>
+                </div>
+            ))}
+            <br /><br />
+                    <Button variant="raised" onClick={this.addRow}>Add another board</Button>
+                    <Divider style={{ margin: '20px 0' }} />
+                    <Button variant="raised" color="primary" onClick={this.submit} >Submit</Button>
+                    </form>
+
+                    </div>
+
+                    </Modal>
             </Grid>
         )
     

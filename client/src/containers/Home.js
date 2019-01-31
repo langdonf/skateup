@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid'
-import Events from '../components/Main/Home/Events'
+import LocalEvents from '../components/Main/Home/LocalEvents'
 import ProfileSidebar from '../components/Main/Home/ProfileSidebar'
 
 const style = {paddingTop: 120}
@@ -21,7 +21,7 @@ function Home(props) {
     return (
         <div className={classes.root} style={style}>
             <Grid container spacing={24}>
-                <Events />
+                <LocalEvents />
                 <ProfileSidebar />
             </Grid>
         </div>
