@@ -129,7 +129,7 @@ class ProfileSidebar extends React.Component{
 
         
         return(
-            <Grid item xs={4}>
+            <Grid item xs={12}>
                 <Paper className={classes.root} elevation={1}>
                     <Grid container >
                     <Avatar alt="Remy Sharp" 

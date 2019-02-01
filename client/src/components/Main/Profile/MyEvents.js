@@ -55,7 +55,7 @@ class MyEvents extends React.Component{
     const { classes } = this.props;
 
     return (
-            <Grid item xs={8}>
+            <Grid item xs={12}>
                 <Paper className={classes.root} elevation={1}>
                 <GridList cellHeight={180} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>

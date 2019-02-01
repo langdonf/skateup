@@ -21,9 +21,13 @@ function Profile(props) {
     return (
         <div className={classes.root} style={style}>
             <Grid container spacing={24}>
-                <MyEvents />
-                <ProfileSidebar />
-                <EventsAttending /> 
+                <Grid item xs={8}>
+                    <MyEvents />
+                    <EventsAttending /> 
+                </Grid>
+                <Grid item xs={4}>
+                    <ProfileSidebar />
+                </Grid>
             </Grid>
         </div>
     );

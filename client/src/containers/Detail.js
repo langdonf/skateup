@@ -158,12 +158,36 @@ class Detail extends React.Component{
 		var eventId = this.props.match.params.eventId
 		var userId = localStorage.getItem('userId');
 		Axios.post(`${backURL}/api/events/attend/${userId}/${eventId}`).then(response => {
-			
+			this.setState({
+				disabled: true
+			})
 			
 			
 		})
 	}
+	handleCity = e => {
+		var ths = this;
+		Axios
+			.post(
+				`https://maps.googleapis.com/maps/api/geocode/json?address=${
+					e.target.value
+				}&key=${APIKey.APIKey}`
+			)
+			.then(function(response) {
+				console.log(response);
+				ths.setState({
+					
+					city: response.data.results[0].formatted_address
 
+					
+
+				});
+				// .catch(function (error) {
+				//   console.log(error);
+				// }
+				// );
+			});
+	};
 	handleDateChange = date => {
 		this.setState({ selectedDate: date });
 	};
@@ -189,10 +213,10 @@ class Detail extends React.Component{
             
 
 			})
-			.catch(function (error) {
-			  console.log(error);
-			}
-			);
+			// .catch(function (error) {
+			//   console.log(error);
+			// }
+			// );
 		});
     };
     
@@ -305,12 +329,12 @@ className={classes.textField}
 onChange={this.onChange}
 onBlur={this.handleCity}
 defaultValue={this.state.eventDetails.city}
-
 type="text"
 variant="outlined"
 fullWidth={true}
 helperText={this.state.city}
 />
+
 <TextField
 id="startPoint"
 label="Start Address"

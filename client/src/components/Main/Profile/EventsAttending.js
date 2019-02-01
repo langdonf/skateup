@@ -4,8 +4,6 @@ import Paper from '@material-ui/core/Paper';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
@@ -20,6 +18,7 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit * 2
     },
     margin:{
         margin: theme.spacing.unit * 2,
@@ -55,7 +54,7 @@ class eventsAttending extends React.Component{
     const { classes } = this.props;
 
     return (
-            <Grid item xs={8}>
+            <Grid item xs={12}>
                 <Paper className={classes.root} elevation={1}>
                 <GridList cellHeight={180} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
