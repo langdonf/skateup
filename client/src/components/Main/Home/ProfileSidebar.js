@@ -46,6 +46,7 @@ const styles = theme => ({
 
     },
     
+    
       
 });
 const inputStyle = {
@@ -76,17 +77,20 @@ class ProfileSidebar extends React.Component{
             const { rows } = this.state
             rows.push({ _id: uuidv4() })
             this.setState({ rows })
+            console.log("Add row happened");
             }
         addBoard = (e) => {
             const { boards } = this.state
             boards.push(e.target.value)
             this.setState({ boards })
+            console.log("Add board happened");
             }
         removeRow = (index) => {
-            const { boards } = this.state
-            if (boards.length > 1) {
-                boards.splice(index, 1)
-                this.setState({ boards })
+            const { rows } = this.state
+            if (rows.length > 1) {
+                rows.splice(index, 1)
+                this.setState({ rows })
+                console.log("Remove row happened");
             }
             }
         submit = () => {
@@ -116,13 +120,26 @@ class ProfileSidebar extends React.Component{
 			.then(response => {
                 // console.log(response);
                 var info = response.data.data;
+               
                 this.setState({
                     username: info.username,
                     hometown: info.hometown,
                     boards: info.boards,
                     joinDate: info.joinDate.substring(0,10)
                 })
-			})
+                    this.handleRows()
+                
+            })
+            
+        }
+        handleRows=()=>{
+            var rows = []
+            this.state.boards.forEach(board => {
+                rows.push({ _id: uuidv4() })
+            });
+            this.setState({
+                rows: rows
+            })
         }
         render(){
             const { classes } = this.props;
@@ -184,13 +201,15 @@ class ProfileSidebar extends React.Component{
                     onClose={this.handleEditClose}
 
                     >
-
+                    
                     <div  className={classes.paper}>
                     <form className={classes.container} >
+                    <div>
                     <TextField
                     id="username"
                     name="username"
                     label="Username"
+                    fullWidth
                     className={classes.textField}
                     onChange={this.onChange}
                     margin="normal"
@@ -202,6 +221,7 @@ class ProfileSidebar extends React.Component{
                     <TextField
                     id="hometown"
                     label="Hometown"
+                    fullWidth
                     className={classes.textField}
                     onChange={this.onChange}
                     onBlur={this.handleFuckMaps}
@@ -212,11 +232,13 @@ class ProfileSidebar extends React.Component{
 
 
                     />
-                    {this.state.boards.map((row, i) => (
+                    </div>
+                    {this.state.rows.map((row, i) => (
                 <div key={row._id}>
                 <TextField
-                    label="Board Type"
-                    id="boards"
+                    label="Board Name"
+                    fullWidth
+                    className={classes.textField}
                     variant="outlined"
                     style={inputStyle}
                     onBlur={this.addBoard}

@@ -48,35 +48,16 @@ class RegModal extends React.Component {
             errors: [{email:"",password:""}]
         };
     }
+    addBoard = (e) => {
+        const { boards } = this.state
+        boards.push(e.target.value)
+        this.setState({ boards })
+        }
     addRow = () => {
         const { rows } = this.state
         rows.push({ _id: uuidv4() })
         this.setState({ rows })
         }
-        handleFuckMaps = e => {
-            var ths = this;
-            axios
-              .post(
-                `https://maps.googleapis.com/maps/api/geocode/json?address=${
-                  e.target.value
-                }&key=${APIKey.APIKey}`
-              )
-              .then(function(response) {
-                
-                ths.setState({
-                 
-                  hometown: response.data.results[0].formatted_address
-        
-                  
-        
-                });
-                // .catch(function (error) {
-                //   console.log(error);
-                // }
-                // );
-              });
-          };
-
     removeRow = (index) => {
         const { rows } = this.state
         if (rows.length > 1) {
@@ -84,6 +65,32 @@ class RegModal extends React.Component {
             this.setState({ rows })
         }
         }
+    
+    handleFuckMaps = e => {
+        var ths = this;
+        axios
+            .post(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${
+                e.target.value
+            }&key=${APIKey.APIKey}`
+            )
+            .then(function(response) {
+            
+            ths.setState({
+                
+                hometown: response.data.results[0].formatted_address
+    
+                
+    
+            });
+            // .catch(function (error) {
+            //   console.log(error);
+            // }
+            // );
+            });
+        };
+
+    
     submitSuccess = (newUser) =>{
         axios.post(`${backURL}/api/users/login`, {email: newUser.email, password: newUser.password})
         .then(function(response){
@@ -128,11 +135,7 @@ class RegModal extends React.Component {
         
     }
 
-    addBoard = (e) => {
-        const { boards } = this.state
-        boards.push(e.target.value)
-        this.setState({ boards })
-        }
+    
     onChange = (e) => {
         this.setState({ [e.target.id]: e.target.value });
         };
