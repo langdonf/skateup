@@ -60,9 +60,10 @@ class Events extends React.Component{
 
     render(){
         const { classes } = this.props;
+        if(this.state.events.length >0){
         let allEvents = this.state.events.map(tile => (
             <GridListTile key={tile.start.lat}>
-            <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
+            <img src={`${backURL.backURL}/${tile.photo}`} alt={tile.title} />
                 <GridListTileBar id={tile._id}
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}
@@ -89,6 +90,11 @@ class Events extends React.Component{
 
             </Grid>
     );
+        }else{
+            return(
+                <div></div>
+            )
+        }
 }
         
     
