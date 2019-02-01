@@ -45,7 +45,8 @@ class RegModal extends React.Component {
             onSubmitValues: null,
             open: false,
             isLoggedin: false,
-            errors: [{email:"",password:""}]
+            errors: [{email:"",password:""}],
+            error: false
         };
     }
     addBoard = (e) => {
@@ -162,6 +163,7 @@ class RegModal extends React.Component {
                 margin="normal"
                 variant="outlined"
                 required
+                error={this.state.error}
                 helperText={this.state.errors[0].username}
             />
             <TextField
@@ -238,6 +240,7 @@ class RegModal extends React.Component {
                 <RegModalWrapped />
             </div>
             </Modal>
+            
        
         );
     }

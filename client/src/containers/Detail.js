@@ -18,7 +18,11 @@ import {
 	TimePicker,
 	DatePicker
 } from "material-ui-pickers";
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 var moment = require('moment');
 const style = {paddingTop: 120}
@@ -52,7 +56,7 @@ class Detail extends React.Component{
     constructor(props){
         super(props)
         this.state = { 
-			
+			open: false,
             eventDetails: {}, 
             title: "",
             city: "",
@@ -176,7 +180,20 @@ class Detail extends React.Component{
 			
 		)
 	}
-
+	handleClickOpen = () => {
+		this.setState({ open: true });
+	  };
+	
+	  handleClose = () => {
+		this.setState({ open: false });
+		
+	  };
+	  handleCloseYes= () => {
+		this.setState({ open: false });
+		this.delete()
+	  };
+	 
+	
 	handleAttend=()=>{
 		
 		var eventId = this.props.match.params.eventId
@@ -256,7 +273,7 @@ class Detail extends React.Component{
         var deets = this.state.eventDetails
         var deleteButton = []
         if (window.localStorage.getItem('userId') === deets.owner){
-			deleteButton.push(<Button key={0} onClick={this.delete} color="primary" > 
+			deleteButton.push(<Button key={0}  onClick={this.handleClickOpen} color="primary" > 
 			Cancel Event
 			</Button>, <Button key={1} onClick={this.handleEditOpen} color="primary" > 
 			Edit Event Details
@@ -430,6 +447,31 @@ Submit
 </MuiPickersUtilsProvider>
 </div>
 </Modal>
+<div>
+        
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+		  aria-describedby="alert-dialog-description"
+		  maxWidth="xs"
+        >
+          
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to cancel? {this.state.attendees} people will be disapointed. 
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Disagree
+            </Button>
+            <Button onClick={this.handleCloseYes} color="primary" autoFocus>
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
 </div>
             );
         }else{
