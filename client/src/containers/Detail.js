@@ -52,6 +52,7 @@ class Detail extends React.Component{
     constructor(props){
         super(props)
         this.state = { 
+			
             eventDetails: {}, 
             title: "",
             city: "",
@@ -79,7 +80,9 @@ class Detail extends React.Component{
 				title: response.data.data[0].title,
 				city: response.data.data[0].city,
 				details: response.data.data[0].details,
-				date: response.data.data[0].date
+				date: response.data.data[0].date,
+				selectedDate: response.data.data[0].date,
+				attendees: response.data.data[0].participant.length
 
 		})
 		if (response.data.data[0].participant.includes(localStorage.getItem('userId'))){
@@ -88,8 +91,9 @@ class Detail extends React.Component{
 			})
 		} 
 			
-		
-    })
+		this.handleCityOnLoad()
+	})
+	
 }
 
     handleUser=(user)=>{
@@ -110,6 +114,26 @@ class Detail extends React.Component{
 			window.location="/profile"
 			})
 		}
+		handleCityOnLoad=()=>{
+			var ths = this
+			var lat = this.state.eventDetails.start.lat
+			var lng = this.state.eventDetails.start.lng
+			Axios
+			.post(
+				`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${APIKey.APIKey}`
+			)
+			.then(function(response) {
+				console.log(response);
+				ths.setState({
+				startName: response.data.results[0].formatted_address
+				});
+				// .catch(function (error) {
+				//   console.log(error);
+				// }
+				// );
+			});  
+		}
+	
 		handleEditOpen = () => {
 			var ths = this
 			var lat = this.state.eventDetails.start.lat
@@ -191,6 +215,7 @@ class Detail extends React.Component{
 	handleDateChange = date => {
 		this.setState({ selectedDate: date });
 	};
+	
 
     handleFuckMaps = e => {
 		var ths = this;
@@ -257,10 +282,17 @@ class Detail extends React.Component{
 				<Typography variant="h6" >
 					{deets.details}
 				</Typography>
+				
 				<Typography align="right" variant="subtitle1">
 					Hosted by: {this.state.user}
 				</Typography>
+				<Typography align="left" variant="subtitle1">
+				{this.state.attendees} - attending
+				</Typography>
+				
+				
 				{deleteButton}
+				
 				<Button 
 					justify="flex-end" 
 					key={4} 
@@ -269,6 +301,7 @@ class Detail extends React.Component{
 					disabled={this.state.disabled}
 					>Attend Event
 				</Button>
+				
 			
 		</Grid>
 			<Grid item xs container direction="column" spacing={16}>
@@ -340,7 +373,7 @@ id="startPoint"
 label="Start Address"
 className={classes.textField}
 onBlur={this.handleFuckMaps}
-defaultValue={start}
+defaultValue={this.state.startName}
 type="text"
 variant="outlined"
 fullWidth={true}
