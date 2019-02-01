@@ -90,6 +90,7 @@ class LogModal extends React.Component {
                 label="Email"
                 className={classes.textField}
                 onChange={this.onChange}
+                required
                 type="email"
                 name="email"
                 margin="normal"
@@ -103,6 +104,7 @@ class LogModal extends React.Component {
                 label="Password"
                 className={classes.textField}
                 onChange={this.onChange}
+                required
                 type="password"
                 name="password"
                 margin="normal"

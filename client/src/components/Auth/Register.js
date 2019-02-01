@@ -161,6 +161,7 @@ class RegModal extends React.Component {
                 onChange={this.onChange}
                 margin="normal"
                 variant="outlined"
+                required
                 helperText={this.state.errors[0].username}
             />
             <TextField
@@ -171,6 +172,7 @@ class RegModal extends React.Component {
                 type="email"
                 name="email"
                 margin="normal"
+                required
                 variant="outlined"
                 helperText={this.state.errors[0].email}
             />
@@ -182,6 +184,7 @@ class RegModal extends React.Component {
                 type="password"
                 margin="normal"
                 variant="outlined"
+                required
                 helperText={this.state.errors[0].password}
             />
             <TextField
@@ -192,6 +195,7 @@ class RegModal extends React.Component {
                 type="password"
                 margin="normal"
                 variant="outlined"
+                required
                 helperText={this.state.errors[0].password2}
             />
             <TextField
@@ -203,6 +207,7 @@ class RegModal extends React.Component {
                 type="text"
                 margin="normal"
                 variant="outlined"
+                required
                 helperText={this.state.hometown}
                 
             />

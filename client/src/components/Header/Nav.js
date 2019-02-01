@@ -275,6 +275,7 @@ class Nav extends React.Component {
 											margin="normal"
 											variant="outlined"
 											fullWidth={true}
+											required
 										/>
 
 										<TextField
@@ -288,6 +289,7 @@ class Nav extends React.Component {
 											variant="outlined"
 											fullWidth={true}
 											helperText={this.state.city}
+											required
 										/>
 										<TextField
 											id="startPoint"
@@ -299,6 +301,7 @@ class Nav extends React.Component {
 											variant="outlined"
 											fullWidth={true}
 											helperText={this.state.formatted}
+											required
 										/>
 										
 									 
@@ -311,6 +314,7 @@ class Nav extends React.Component {
 											className={classes.textField}
 											margin="normal"
 											fullWidth={true}
+											required
 										/>
 										<Grid
 											container
@@ -322,12 +326,14 @@ class Nav extends React.Component {
 												label="Date picker"
 												value={selectedDate}
 												onChange={this.handleDateChange}
+												required
 											/>
 											<TimePicker
 												margin="normal"
 												label="Time picker"
 												value={selectedDate}
 												onChange={this.handleDateChange}
+												required
 											/>
 										</Grid>
 										<input
@@ -337,6 +343,7 @@ class Nav extends React.Component {
 											className={classes.input}
 											id="contained-button-file"
 											type="file"
+											required
 										/>
 										<label htmlFor="contained-button-file">
 											<Button

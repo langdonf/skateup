@@ -182,12 +182,15 @@ class Detail extends React.Component{
 		var eventId = this.props.match.params.eventId
 		var userId = localStorage.getItem('userId');
 		Axios.post(`${backURL}/api/events/attend/${userId}/${eventId}`).then(response => {
+			
+			
+			
+		}).then(
 			this.setState({
-				disabled: true
+				disabled: true,
+				attendees: this.state.attendees +1
 			})
-			
-			
-		})
+		)
 	}
 	handleCity = e => {
 		var ths = this;
@@ -348,7 +351,7 @@ id="title"
 label="Event Title"
 className={classes.textField}
 onChange={this.onChange}
-
+required
 margin="normal"
 defaultValue={this.state.eventDetails.title}
 variant="outlined"
@@ -358,6 +361,7 @@ fullWidth={true}
 <TextField
 id="city"
 label="City"
+required
 className={classes.textField}
 onChange={this.onChange}
 onBlur={this.handleCity}
@@ -371,6 +375,7 @@ helperText={this.state.city}
 <TextField
 id="startPoint"
 label="Start Address"
+required
 className={classes.textField}
 onBlur={this.handleMaps}
 defaultValue={this.state.startName}
@@ -385,6 +390,7 @@ helperText={this.state.formatted}
 id="details"
 label="Details"
 multiline
+required
 rowsMax="8"
 onChange={this.onChange}
 defaultValue={this.state.eventDetails.details}

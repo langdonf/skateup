@@ -215,6 +215,7 @@ class ProfileSidebar extends React.Component{
                     id="username"
                     name="username"
                     label="Username"
+                    required
                     fullWidth
                     className={classes.textField}
                     onChange={this.onChange}
@@ -228,6 +229,7 @@ class ProfileSidebar extends React.Component{
                     id="hometown"
                     label="Hometown"
                     fullWidth
+                    required
                     className={classes.textField}
                     onChange={this.onChange}
                     onBlur={this.handleMaps}
@@ -243,6 +245,7 @@ class ProfileSidebar extends React.Component{
                 <div key={row._id}>
                 <TextField
                     label="Board Name"
+                    
                     fullWidth
                     className={classes.textField}
                     variant="outlined"
