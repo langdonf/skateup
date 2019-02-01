@@ -11,7 +11,6 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from "axios";
-import APIKey from '../../../constants'
 import {backURL} from '../../../constants'
 
 var moment = require('moment');
@@ -92,6 +91,13 @@ class ProfileSidebar extends React.Component{
                 this.setState({ rows })
                 console.log("Remove row happened");
             }
+            const { boards } = this.state
+            if (boards.length > 1) {
+                boards.splice(index, 1)
+                this.setState({ boards })
+                console.log("Remove boards happened");
+            }
+
             }
         submit = () => {
             let updated = {
