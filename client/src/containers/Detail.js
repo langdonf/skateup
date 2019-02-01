@@ -18,7 +18,7 @@ import {
 	TimePicker,
 	DatePicker
 } from "material-ui-pickers";
-import {localUrl} from '../components'
+import {localUrl} from '../constants'
 
 var moment = require('moment');
 const style = {paddingTop: 120}
@@ -220,7 +220,7 @@ class Detail extends React.Component{
 			<Typography align="center" gutterBottom variant="h3">
 			{deets.title}
 			</Typography> 
-			<img className={classes.img} src={`${backURL.backURL}${deets.photo}`} alt={deets.title}  />
+			<img className={classes.img} src={`${backURL.backURL}/${deets.photo}`} alt={deets.title}  />
 		</Grid>
 		<Grid item xs={4}>
 			

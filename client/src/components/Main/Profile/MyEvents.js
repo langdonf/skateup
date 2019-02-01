@@ -11,7 +11,7 @@ import backURL from '../../../constants'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import {localUrl} from '../../../components'
+import {localUrl} from '../../../constants'
 
 
 const styles = theme => ({
@@ -59,7 +59,7 @@ class MyEvents extends React.Component{
                 </GridListTile>
                 {this.state.myEvents.map(tile => (
                 <GridListTile key={tile.start.lat}>
-                    <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
+                    <img src={`${backURL.backURL}/${tile.photo}`} alt={tile.title} />
                     <GridListTileBar
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}

@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from "axios";
 import APIKey from '../../../constants'
-import {localUrl} from '../../../components'
+import {localUrl} from '../../../constants'
 var moment = require('moment');
 
 

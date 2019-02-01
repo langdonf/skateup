@@ -13,7 +13,7 @@ import Axios from "axios";
 import backURL from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
-import {localUrl} from '../../../components'
+import {localUrl} from '../../../constants'
 
 const styles = theme => ({
     root: {

@@ -7,7 +7,7 @@ const users = require("./routes/api/users");
 const events = require("./routes/api/events");
 var cors = require('cors')
 const multer = require('multer')
-
+const path = require('path')
 // generate a new express app and call it 'app'
 
 
@@ -27,9 +27,9 @@ app.use(function(req, res, next) {
 });
 
 app.use(cors())
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/client/public/index.html');
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/client/public/index.html');
+// })
 
 app.use('/uploads', express.static('uploads'))
 //DB Config
@@ -50,7 +50,13 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/events", events);
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('client/build'));
 
+  app.get('*', (req, res)=>{
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  });
+}
 
 
 

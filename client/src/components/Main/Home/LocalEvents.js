@@ -13,7 +13,7 @@ import Axios from "axios";
 import backURL from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
-import {localUrl} from '../../../components'
+import {localUrl} from '../../../constants'
 
 
 const styles = theme => ({
@@ -107,7 +107,7 @@ class LocalEvents extends React.Component{
         
         let allEvents = this.state.localEvents.map(tile => (
             <GridListTile key={tile.start.lat}>
-            <img src={`${backURL.backURL}${tile.photo}`} alt={tile.title} />
+            <img src={`${backURL.backURL}/${tile.photo}`} alt={tile.title} />
                 <GridListTileBar id={tile._id}
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}

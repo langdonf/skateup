@@ -21,7 +21,7 @@ import {
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import APIKey from '../../constants'
-import {localUrl} from '../../components'
+import {localUrl} from '../../constants'
 
 const styles = theme => ({
 	root: {
