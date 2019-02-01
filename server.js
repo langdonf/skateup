@@ -27,9 +27,9 @@ app.use(function(req, res, next) {
 });
 
 app.use(cors())
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/client/public/index.html');
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/client/public/index.html');
+// })
 
 app.use('/uploads', express.static('uploads'))
 //DB Config
