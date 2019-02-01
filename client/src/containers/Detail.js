@@ -18,6 +18,7 @@ import {
 	TimePicker,
 	DatePicker
 } from "material-ui-pickers";
+import {localUrl} from '../components'
 
 var moment = require('moment');
 const style = {paddingTop: 120}
@@ -67,7 +68,7 @@ class Detail extends React.Component{
     componentDidMount(){
 		var user =''
 		let eventId = this.props.match.params.eventId;
-		Axios.get(`http://localhost:3001/api/events/detail/${eventId}`)
+		Axios.get(`${localUrl}/api/events/detail/${eventId}`)
 		.then(response => {
 			console.log(response);
 			user = response.data.data[0].owner;
@@ -92,7 +93,7 @@ class Detail extends React.Component{
 }
 
     handleUser=(user)=>{
-		Axios.get(`http://localhost:3001/api/users/${user}`)
+		Axios.get(`${localUrl}/api/users/${user}`)
 		.then(response => {
 			console.log(response);
 			this.setState({
@@ -104,7 +105,7 @@ class Detail extends React.Component{
 		}
 	delete=()=>{
 		let eventId = this.props.match.params.eventId;
-		Axios.delete(`http://localhost:3001/api/events/delete/${eventId}`)
+		Axios.delete(`${localUrl}/api/events/delete/${eventId}`)
 			.then(response => {
 			window.location="/profile"
 			})
@@ -145,7 +146,7 @@ class Detail extends React.Component{
 		}
 		let eventId = this.props.match.params.eventId
 		
-		Axios.post(`http://localhost:3001/api/events/edit/${eventId}`, toSend).then( response => {
+		Axios.post(`${localUrl}/api/events/edit/${eventId}`, toSend).then( response => {
 			window.location=`/profile`
 		}
 			
@@ -156,7 +157,7 @@ class Detail extends React.Component{
 		
 		var eventId = this.props.match.params.eventId
 		var userId = localStorage.getItem('userId');
-		Axios.post(`http://localhost:3001/api/events/attend/${userId}/${eventId}`).then(response => {
+		Axios.post(`${localUrl}/api/events/attend/${userId}/${eventId}`).then(response => {
 			
 			
 			

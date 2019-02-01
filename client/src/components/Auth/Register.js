@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider'
 import axios from 'axios'
 import uuidv4 from 'uuid/v4';
 import APIKey from '../../constants'
+import {localUrl} from '../../constants'
 
 
 
@@ -84,7 +85,7 @@ class RegModal extends React.Component {
         }
         }
     submitSuccess = (newUser) =>{
-        axios.post('http://localhost:3001/api/users/login', {email: newUser.email, password: newUser.password})
+        axios.post(`${localUrl}/api/users/login`, {email: newUser.email, password: newUser.password})
         .then(function(response){
             let token = response.data.token
             localStorage.userId = response.data.userData.id
@@ -112,7 +113,7 @@ class RegModal extends React.Component {
             };
 
         var ths = this
-        axios.post('http://localhost:3001/api/users/register', newUser)
+        axios.post(`${localUrl}/api/users/register`, newUser)
         .then(function (response) {
            
             ths.submitSuccess(newUser)   

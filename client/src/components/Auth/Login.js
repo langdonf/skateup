@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-
+import {localUrl} from '../../constants'
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider'
 import axios from 'axios'
@@ -51,7 +51,7 @@ class LogModal extends React.Component {
 
         
         var ths = this
-        axios.post('http://localhost:3001/api/users/login', user)
+        axios.post(`${localUrl}/api/users/login`, user)
         .then(function (response) {
            
             let token = response.data.token

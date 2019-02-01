@@ -12,7 +12,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from "axios";
 import APIKey from '../../../constants'
+import {localUrl} from '../../../components'
 var moment = require('moment');
+
 
 const styles = theme => ({
     root: {
@@ -95,7 +97,7 @@ class ProfileSidebar extends React.Component{
             }
             let userId = localStorage.getItem('userId')
             
-            Axios.put(`http://localhost:3001/api/users/edit/${userId}`, updated).then( response => {
+            Axios.put(`${localUrl}/api/users/edit/${userId}`, updated).then( response => {
                 window.location=`/profile`
             }
                 
@@ -109,7 +111,7 @@ class ProfileSidebar extends React.Component{
             };
         componentDidMount=()=>{
         let id = localStorage.getItem('userId')
-		axios.get(`http://localhost:3001/api/users/${id}`)
+		axios.get(`${localUrl}/api/users/${id}`)
 			.then(response => {
                 // console.log(response);
                 var info = response.data.data;

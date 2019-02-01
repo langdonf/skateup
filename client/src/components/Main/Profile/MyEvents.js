@@ -11,6 +11,7 @@ import backURL from '../../../constants'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import {localUrl} from '../../../components'
 
 
 const styles = theme => ({
@@ -34,7 +35,7 @@ class MyEvents extends React.Component{
     componentDidMount(){
         var userId = localStorage.getItem('userId')
        
-        Axios.get(`http://localhost:3001/api/events/user/${userId}`)
+        Axios.get(`${localUrl}/api/events/user/${userId}`)
         .then((response)=>{
             console.log(response.data);
             var events = response.data.data;

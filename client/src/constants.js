@@ -1,4 +1,5 @@
 module.exports = {  
-    backURL : 'http://localhost:3001/',
-    APIKey: 'AIzaSyBBmBzb1c4ESBGpg3Q5a6ItFNp-3bZNSYI'
+    backURL : 'https://skateup.herokuapp.com',
+    APIKey: 'AIzaSyBBmBzb1c4ESBGpg3Q5a6ItFNp-3bZNSYI',
+    localUrl: 'https://skateup.herokuapp.com'
 }

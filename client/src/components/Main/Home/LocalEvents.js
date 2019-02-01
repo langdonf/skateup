@@ -13,6 +13,7 @@ import Axios from "axios";
 import backURL from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
+import {localUrl} from '../../../components'
 
 
 const styles = theme => ({
@@ -53,7 +54,7 @@ class LocalEvents extends React.Component{
         
         
         var id = localStorage.getItem('userId')
-        Axios.get(`http://localhost:3001/api/users/${id}`)
+        Axios.get(`${localUrl}/api/users/${id}`)
 			.then(response => {
                 
                 var home = response.data.data.hometown;
@@ -91,7 +92,7 @@ class LocalEvents extends React.Component{
     }
     handleRange=()=>{
         var ths = this
-        Axios.get(`http://localhost:3001/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
+        Axios.get(`${localUrl}/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
                 .then(response => {
                
                     ths.setState ({

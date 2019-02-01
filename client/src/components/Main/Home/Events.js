@@ -13,6 +13,7 @@ import Axios from "axios";
 import backURL from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
+import {localUrl} from '../../../components'
 
 const styles = theme => ({
     root: {
@@ -48,7 +49,7 @@ class Events extends React.Component{
     }
 
     componentDidMount(){
-        Axios.get('http://localhost:3001/api/events/all')
+        Axios.get(`${localUrl}/api/events/all`)
         .then(response => {
             
             this.setState ({

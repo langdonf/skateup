@@ -21,6 +21,7 @@ import {
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import APIKey from '../../constants'
+import {localUrl} from '../../components'
 
 const styles = theme => ({
 	root: {
@@ -85,7 +86,7 @@ class Nav extends React.Component {
 		}
 
 		axios
-			.post("http://localhost:3001/api/events/newevent", formData)
+			.post(`${localUrl}/api/events/newevent`, formData)
 			.then(function(response) {
 				console.log(response);
 				window.location ='/home'
