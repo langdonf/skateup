@@ -51,13 +51,13 @@ app.use("/api/events", events);
 
 
 
-
+app.use('/uploads', express.static('uploads'))
 
 
 const port = process.env.PORT || 3001;
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, "client", "build")))
-  // app.use('/uploads', express.static('uploads'))
+  
   app.get('*', (req, res)=>{
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   });
@@ -65,7 +65,7 @@ if(process.env.NODE_ENV === 'production'){
   app.use(express.static('public'))
   app.get('/', (req, res) => {
   res.sendFile(__dirname + '/client/public/index.html');
-  app.use('/uploads', express.static('uploads'))
+ 
 })
 }
 
