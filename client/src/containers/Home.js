@@ -21,8 +21,12 @@ function Home(props) {
     return (
         <div className={classes.root} style={style}>
             <Grid container spacing={24}>
-                <LocalEvents />
-                <ProfileSidebar />
+                <Grid item xs={8}>
+                    <LocalEvents />
+                </Grid>
+                <Grid item xs={4}>
+                    <ProfileSidebar />
+                </Grid>
             </Grid>
         </div>
     );
