@@ -22,7 +22,7 @@ const styles = theme => ({
         padding: theme.spacing.unit * 4,
         outline: 'none',
     },
-    });
+});
 
 const inputStyle = {
         marginRight: '20px',
