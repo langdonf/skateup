@@ -27,9 +27,9 @@ app.use(function(req, res, next) {
 });
 
 app.use(cors())
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/client/public/index.html');
-// })
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/client/public/index.html');
+})
 
 app.use('/uploads', express.static('uploads'))
 //DB Config
@@ -47,8 +47,8 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 // Routes
-app.use("api/users", users);
-app.use("api/events", events);
+app.use("/api/users", users);
+app.use("/api/events", events);
 
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static('client/build'));
