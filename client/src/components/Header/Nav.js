@@ -52,7 +52,7 @@ class Nav extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedDate: new Date("2019-04-20T16:20:00"),
+			selectedDate: new Date("2019-08-19T16:20:00"),
 			isLoggedIn: false,
 			openReg: false,
 			openLog: false,
@@ -165,7 +165,7 @@ class Nav extends React.Component {
 			});
 	};
 	
-	handleFuckMaps = e => {
+	handleMaps = e => {
 		var ths = this;
 		axios
 			.post(
@@ -293,7 +293,7 @@ class Nav extends React.Component {
 											id="startPoint"
 											label="Start Address"
 											className={classes.textField}
-											onBlur={this.handleFuckMaps}
+											onBlur={this.handleMaps}
 											autoComplete="current-password"
 											type="text"
 											variant="outlined"

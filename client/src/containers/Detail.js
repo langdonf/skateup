@@ -217,7 +217,7 @@ class Detail extends React.Component{
 	};
 	
 
-    handleFuckMaps = e => {
+    handleMaps = e => {
 		var ths = this;
 		Axios
 			.post(
@@ -372,7 +372,7 @@ helperText={this.state.city}
 id="startPoint"
 label="Start Address"
 className={classes.textField}
-onBlur={this.handleFuckMaps}
+onBlur={this.handleMaps}
 defaultValue={this.state.startName}
 type="text"
 variant="outlined"

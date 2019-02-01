@@ -66,7 +66,7 @@ class RegModal extends React.Component {
         }
         }
     
-    handleFuckMaps = e => {
+    handleMaps = e => {
         var ths = this;
         axios
             .post(
@@ -199,7 +199,7 @@ class RegModal extends React.Component {
                 label="Hometown"
                 className={classes.textField}
                 onChange={this.onChange}
-                onBlur={this.handleFuckMaps}
+                onBlur={this.handleMaps}
                 type="text"
                 margin="normal"
                 variant="outlined"

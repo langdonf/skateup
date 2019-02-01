@@ -230,7 +230,7 @@ class ProfileSidebar extends React.Component{
                     fullWidth
                     className={classes.textField}
                     onChange={this.onChange}
-                    onBlur={this.handleFuckMaps}
+                    onBlur={this.handleMaps}
                     type="text"
                     margin="normal"
                     variant="outlined"
