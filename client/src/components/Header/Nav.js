@@ -21,7 +21,8 @@ import {
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import APIKey from '../../constants'
-import {localUrl} from '../../constants'
+import {backURL} from '../../constants'
+
 
 const styles = theme => ({
 	root: {
@@ -86,7 +87,7 @@ class Nav extends React.Component {
 		}
 
 		axios
-			.post(`https://skateup.herokuapp.com/api/events/newevent`, formData)
+			.post(`${backURL}/api/events/newevent`, formData)
 			.then(function(response) {
 				console.log(response);
 				window.location ='/home'

@@ -9,9 +9,9 @@ import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
-import backURL from '../../../constants'
+import {backURL} from '../../../constants'
 import { Link } from "react-router-dom";
-import {localUrl} from '../../../constants'
+
 
 const styles = theme => ({
     root: {
@@ -34,7 +34,7 @@ class eventsAttending extends React.Component{
         var ths = this
         var userId = localStorage.getItem('userId')
         
-        Axios.get(`https://skateup.herokuapp.com/api/events/attending/${userId}`)
+        Axios.get(`${backURL}/api/events/attending/${userId}`)
         .then(response => {
 			console.log(response);
 			
@@ -58,7 +58,7 @@ class eventsAttending extends React.Component{
                 </GridListTile>
                 {this.state.eventsAttending.map(tile => (
                 <GridListTile key={tile.start.lat}>
-                    <img src={`${backURL.backURL}/${tile.photo}`} alt={tile.title} />
+                    <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
                     <GridListTileBar
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}

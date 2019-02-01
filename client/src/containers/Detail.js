@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid'
-import backURL from '../constants'
+import {backURL} from '../constants'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
 import Button from "@material-ui/core/Button";
@@ -18,7 +18,7 @@ import {
 	TimePicker,
 	DatePicker
 } from "material-ui-pickers";
-import {localUrl} from '../constants'
+
 
 var moment = require('moment');
 const style = {paddingTop: 120}
@@ -68,7 +68,7 @@ class Detail extends React.Component{
     componentDidMount(){
 		var user =''
 		let eventId = this.props.match.params.eventId;
-		Axios.get(`https://skateup.herokuapp.com/api/events/detail/${eventId}`)
+		Axios.get(`${backURL}/api/events/detail/${eventId}`)
 		.then(response => {
 			console.log(response);
 			user = response.data.data[0].owner;
@@ -93,7 +93,7 @@ class Detail extends React.Component{
 }
 
     handleUser=(user)=>{
-		Axios.get(`https://skateup.herokuapp.com/api/users/${user}`)
+		Axios.get(`${backURL}/api/users/${user}`)
 		.then(response => {
 			console.log(response);
 			this.setState({
@@ -105,7 +105,7 @@ class Detail extends React.Component{
 		}
 	delete=()=>{
 		let eventId = this.props.match.params.eventId;
-		Axios.delete(`https://skateup.herokuapp.com/api/events/delete/${eventId}`)
+		Axios.delete(`${backURL}/api/events/delete/${eventId}`)
 			.then(response => {
 			window.location="/profile"
 			})
@@ -146,7 +146,7 @@ class Detail extends React.Component{
 		}
 		let eventId = this.props.match.params.eventId
 		
-		Axios.post(`https://skateup.herokuapp.com/api/events/edit/${eventId}`, toSend).then( response => {
+		Axios.post(`${backURL}/api/events/edit/${eventId}`, toSend).then( response => {
 			window.location=`/profile`
 		}
 			
@@ -157,7 +157,7 @@ class Detail extends React.Component{
 		
 		var eventId = this.props.match.params.eventId
 		var userId = localStorage.getItem('userId');
-		Axios.post(`https://skateup.herokuapp.com/api/events/attend/${userId}/${eventId}`).then(response => {
+		Axios.post(`${backURL}/api/events/attend/${userId}/${eventId}`).then(response => {
 			
 			
 			
@@ -220,7 +220,7 @@ class Detail extends React.Component{
 			<Typography align="center" gutterBottom variant="h3">
 			{deets.title}
 			</Typography> 
-			<img className={classes.img} src={`${backURL.backURL}/${deets.photo}`} alt={deets.title}  />
+			<img className={classes.img} src={`${backURL}/${deets.photo}`} alt={deets.title}  />
 		</Grid>
 		<Grid item xs={4}>
 			

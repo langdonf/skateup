@@ -10,10 +10,10 @@ import InfoIcon from '@material-ui/icons/Info';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from "@material-ui/core";
 import Axios from "axios";
-import backURL from '../../../constants'
+import {backURL} from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
-import {localUrl} from '../../../constants'
+
 
 
 const styles = theme => ({
@@ -54,7 +54,7 @@ class LocalEvents extends React.Component{
         
         
         var id = localStorage.getItem('userId')
-        Axios.get(`https://skateup.herokuapp.com/api/users/${id}`)
+        Axios.get(`${backURL}/api/users/${id}`)
 			.then(response => {
                 
                 var home = response.data.data.hometown;
@@ -92,7 +92,7 @@ class LocalEvents extends React.Component{
     }
     handleRange=()=>{
         var ths = this
-        Axios.get(`https://skateup.herokuapp.com/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
+        Axios.get(`${backURL}/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
                 .then(response => {
                
                     ths.setState ({
@@ -107,7 +107,7 @@ class LocalEvents extends React.Component{
         
         let allEvents = this.state.localEvents.map(tile => (
             <GridListTile key={tile.start.lat}>
-            <img src={`${backURL.backURL}/${tile.photo}`} alt={tile.title} />
+            <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
                 <GridListTileBar id={tile._id}
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}

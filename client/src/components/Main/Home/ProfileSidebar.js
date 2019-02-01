@@ -12,7 +12,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from "axios";
 import APIKey from '../../../constants'
-import {localUrl} from '../../../constants'
+import {backURL} from '../../../constants'
+
 var moment = require('moment');
 
 
@@ -97,7 +98,7 @@ class ProfileSidebar extends React.Component{
             }
             let userId = localStorage.getItem('userId')
             
-            Axios.put(`https://skateup.herokuapp.com/api/users/edit/${userId}`, updated).then( response => {
+            Axios.put(`${backURL}/api/users/edit/${userId}`, updated).then( response => {
                 window.location=`/profile`
             }
                 
@@ -111,7 +112,7 @@ class ProfileSidebar extends React.Component{
             };
         componentDidMount=()=>{
         let id = localStorage.getItem('userId')
-		axios.get(`https://skateup.herokuapp.com/api/users/${id}`)
+		axios.get(`${backURL}/api/users/${id}`)
 			.then(response => {
                 // console.log(response);
                 var info = response.data.data;
