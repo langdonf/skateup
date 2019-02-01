@@ -230,13 +230,7 @@ class Nav extends React.Component {
 			<div className={classes.root}>
 				<AppBar position="static" style={{ position: "fixed", top: 0 }}>
 					<Toolbar>
-						<IconButton
-							className={classes.menuButton}
-							color="inherit"
-							aria-label="Menu"
-						>
-							<MenuIcon />
-						</IconButton>
+						
 						<Typography
 							component={Link}
 							to="/"

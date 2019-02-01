@@ -12,10 +12,8 @@ a{
   text-shadow: 2px 2px 4px rgba(44, 62, 80, 1);
 
 }
-#icon {
-  background: url('../src/images/skateboard-clipart-png-2.png');
-  height: 20px;
-  width: 20px;
-  display: block;
- 
-}
+
+
+/* .MuiGridListTileBar-actionIcon-288{
+  margin: 15px !important;
+} */

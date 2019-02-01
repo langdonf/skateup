@@ -13,7 +13,8 @@ import Axios from "axios";
 import {backURL} from '../../../constants'
 import { Link } from "react-router-dom";
 import {APIKey} from '../../../constants'
-
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation'
 
 const styles = theme => ({
     root: {
@@ -33,7 +34,10 @@ const styles = theme => ({
         outline: 'none',
     },
     icon:{
-        color: "primary"
+        color: "white"
+    },
+    margin:{
+        margin: theme.spacing.unit * 2,
     }
     
 });
@@ -68,9 +72,20 @@ class Events extends React.Component{
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}
                     actionIcon={
-                        <IconButton color="primary"  className={classes.icon}>
-                            <InfoIcon  color="primary" component={Link} to={`/eventDetail/${tile._id}`} />
-                        </IconButton>}/>
+                        <Fab
+                        variant="extended"
+                        size="small"
+                        color="primary"
+                        aria-label="Add"
+                        className={classes.margin}
+                        component={Link} to={`/eventDetail/${tile._id}`}
+                      >
+                        <NavigationIcon  className={classes.extendedIcon} />
+                        More Info
+                      </Fab>
+                      
+                    }
+                        />
                 </GridListTile>
         ))
         
@@ -80,7 +95,7 @@ class Events extends React.Component{
                 <Paper className={classes.root} elevation={1}>
                     <GridList cellHeight={180} className={classes.gridList}>
                         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                            <Typography component="div" variant="title" >Local Events</Typography>
+                            <Typography component="div" variant="title" >SkateUp Events</Typography>
                         </GridListTile>
                         {allEvents}
 

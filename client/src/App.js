@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Nav from './components/Header/Nav'
-
+import './index.css'
 import Profile from './containers/Profile'
 import Detail from './containers/Detail'
 import Home from "./containers/Home"
