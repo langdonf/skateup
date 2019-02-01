@@ -19,8 +19,8 @@ app.use(
   })
 );
 
-// app.use(express.static('public'))
-app.use(express.static(path.join(__dirname, "client", "build")))
+// 
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -28,11 +28,9 @@ app.use(function(req, res, next) {
 });
 
 app.use(cors())
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/client/public/index.html');
-// })
 
 
+app.use('/uploads', express.static('uploads'))
 //DB Config
 const db = require('./config/keys').mongoURI;
 
@@ -51,18 +49,23 @@ require("./config/passport")(passport);
 app.use("/api/users", users);
 app.use("/api/events", events);
 
-app.use('/uploads', express.static('uploads'))
+
 
 
 
 
 const port = process.env.PORT || 3001;
 if(process.env.NODE_ENV === 'production'){
-  
+  app.use(express.static(path.join(__dirname, "client", "build")))
 
-  app.get(/^\/(?!api).*/, (req, res)=>{
+  app.get('*', (req, res)=>{
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   });
+}else{
+  app.use(express.static('public'))
+  app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/client/public/index.html');
+})
 }
 
 

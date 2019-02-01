@@ -54,7 +54,7 @@ class LocalEvents extends React.Component{
         
         
         var id = localStorage.getItem('userId')
-        Axios.get(`${localUrl}/api/users/${id}`)
+        Axios.get(`https://skateup.herokuapp.com/api/users/${id}`)
 			.then(response => {
                 
                 var home = response.data.data.hometown;
@@ -92,7 +92,7 @@ class LocalEvents extends React.Component{
     }
     handleRange=()=>{
         var ths = this
-        Axios.get(`${localUrl}/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
+        Axios.get(`https://skateup.herokuapp.com/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
                 .then(response => {
                
                     ths.setState ({

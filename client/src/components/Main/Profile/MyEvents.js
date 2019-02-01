@@ -35,7 +35,7 @@ class MyEvents extends React.Component{
     componentDidMount(){
         var userId = localStorage.getItem('userId')
        
-        Axios.get(`${localUrl}/api/events/user/${userId}`)
+        Axios.get(`https://skateup.herokuapp.com/api/events/user/${userId}`)
         .then((response)=>{
             console.log(response.data);
             var events = response.data.data;

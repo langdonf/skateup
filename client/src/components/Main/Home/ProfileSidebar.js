@@ -97,7 +97,7 @@ class ProfileSidebar extends React.Component{
             }
             let userId = localStorage.getItem('userId')
             
-            Axios.put(`${localUrl}/api/users/edit/${userId}`, updated).then( response => {
+            Axios.put(`https://skateup.herokuapp.com/api/users/edit/${userId}`, updated).then( response => {
                 window.location=`/profile`
             }
                 
@@ -111,7 +111,7 @@ class ProfileSidebar extends React.Component{
             };
         componentDidMount=()=>{
         let id = localStorage.getItem('userId')
-		axios.get(`${localUrl}/api/users/${id}`)
+		axios.get(`https://skateup.herokuapp.com/api/users/${id}`)
 			.then(response => {
                 // console.log(response);
                 var info = response.data.data;

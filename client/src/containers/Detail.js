@@ -68,7 +68,7 @@ class Detail extends React.Component{
     componentDidMount(){
 		var user =''
 		let eventId = this.props.match.params.eventId;
-		Axios.get(`${localUrl}/api/events/detail/${eventId}`)
+		Axios.get(`https://skateup.herokuapp.com/api/events/detail/${eventId}`)
 		.then(response => {
 			console.log(response);
 			user = response.data.data[0].owner;
@@ -93,7 +93,7 @@ class Detail extends React.Component{
 }
 
     handleUser=(user)=>{
-		Axios.get(`${localUrl}/api/users/${user}`)
+		Axios.get(`https://skateup.herokuapp.com/api/users/${user}`)
 		.then(response => {
 			console.log(response);
 			this.setState({
@@ -105,7 +105,7 @@ class Detail extends React.Component{
 		}
 	delete=()=>{
 		let eventId = this.props.match.params.eventId;
-		Axios.delete(`${localUrl}/api/events/delete/${eventId}`)
+		Axios.delete(`https://skateup.herokuapp.com/api/events/delete/${eventId}`)
 			.then(response => {
 			window.location="/profile"
 			})
@@ -146,7 +146,7 @@ class Detail extends React.Component{
 		}
 		let eventId = this.props.match.params.eventId
 		
-		Axios.post(`${localUrl}/api/events/edit/${eventId}`, toSend).then( response => {
+		Axios.post(`https://skateup.herokuapp.com/api/events/edit/${eventId}`, toSend).then( response => {
 			window.location=`/profile`
 		}
 			
@@ -157,7 +157,7 @@ class Detail extends React.Component{
 		
 		var eventId = this.props.match.params.eventId
 		var userId = localStorage.getItem('userId');
-		Axios.post(`${localUrl}/api/events/attend/${userId}/${eventId}`).then(response => {
+		Axios.post(`https://skateup.herokuapp.com/api/events/attend/${userId}/${eventId}`).then(response => {
 			
 			
 			

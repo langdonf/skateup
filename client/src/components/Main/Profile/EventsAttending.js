@@ -34,7 +34,7 @@ class eventsAttending extends React.Component{
         var ths = this
         var userId = localStorage.getItem('userId')
         
-        Axios.get(`${localUrl}/api/events/attending/${userId}`)
+        Axios.get(`https://skateup.herokuapp.com/api/events/attending/${userId}`)
         .then(response => {
 			console.log(response);
 			

@@ -49,7 +49,8 @@ class Events extends React.Component{
     }
 
     componentDidMount(){
-        Axios.get(`${localUrl}/api/events/all`)
+        console.log(localUrl);
+        Axios.get(`https://skateup.herokuapp.com/api/events/all`)
         .then(response => {
             
             this.setState ({

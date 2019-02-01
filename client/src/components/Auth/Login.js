@@ -51,7 +51,7 @@ class LogModal extends React.Component {
 
         
         var ths = this
-        axios.post(`${localUrl}/api/users/login`, user)
+        axios.post(`https://skateup.herokuapp.com/api/users/login`, user)
         .then(function (response) {
            
             let token = response.data.token

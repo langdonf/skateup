@@ -86,7 +86,7 @@ class Nav extends React.Component {
 		}
 
 		axios
-			.post(`${localUrl}/api/events/newevent`, formData)
+			.post(`https://skateup.herokuapp.com/api/events/newevent`, formData)
 			.then(function(response) {
 				console.log(response);
 				window.location ='/home'

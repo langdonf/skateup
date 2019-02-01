@@ -85,7 +85,7 @@ class RegModal extends React.Component {
         }
         }
     submitSuccess = (newUser) =>{
-        axios.post(`${localUrl}/api/users/login`, {email: newUser.email, password: newUser.password})
+        axios.post(`https://skateup.herokuapp.com/api/users/login`, {email: newUser.email, password: newUser.password})
         .then(function(response){
             let token = response.data.token
             localStorage.userId = response.data.userData.id
@@ -113,7 +113,7 @@ class RegModal extends React.Component {
             };
 
         var ths = this
-        axios.post(`${localUrl}/api/users/register`, newUser)
+        axios.post(`https://skateup.herokuapp.com/api/users/register`, newUser)
         .then(function (response) {
            
             ths.submitSuccess(newUser)   
