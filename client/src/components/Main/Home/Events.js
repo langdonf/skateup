@@ -18,6 +18,8 @@ const styles = theme => ({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
+        marginLeft: theme.spacing.unit * 4,
+        marginRight:theme.spacing.unit * 4
     },
     actions: {
         display: 'flex',
@@ -88,7 +90,7 @@ class Events extends React.Component{
         
         
         return (
-            <Grid>
+            <Grid className={classes.root}>
                 <Paper className={classes.root} elevation={1}>
                     <GridList cellHeight={180} className={classes.gridList}>
                         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>

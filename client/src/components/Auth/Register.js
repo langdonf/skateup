@@ -10,8 +10,6 @@ import uuidv4 from 'uuid/v4';
 import APIKey from '../../constants'
 import {backURL} from '../../constants'
 
-
-
 const styles = theme => ({
     paper: {
         position: 'absolute',
@@ -24,16 +22,14 @@ const styles = theme => ({
         outline: 'none',
     },
 });
-
 const inputStyle = {
-        marginRight: '20px',
-        width: '250px',
-      }
+    marginRight: '20px',
+    width: '250px',
+}
 
 class RegModal extends React.Component {
     constructor(props) {
         super(props);
-        // var state =  this.props.open
         this.state = {
             username: "",
             email: "",
@@ -49,48 +45,36 @@ class RegModal extends React.Component {
             error: false
         };
     }
+
     addBoard = (e) => {
         const { boards } = this.state
         boards.push(e.target.value)
         this.setState({ boards })
-        }
+    }
+
     addRow = () => {
         const { rows } = this.state
         rows.push({ _id: uuidv4() })
         this.setState({ rows })
-        }
+    }
+
     removeRow = (index) => {
         const { rows } = this.state
         if (rows.length > 1) {
             rows.splice(index, 1)
             this.setState({ rows })
         }
-        }
-    
+    }
+
     handleMaps = e => {
         var ths = this;
-        axios
-            .post(
-            `https://maps.googleapis.com/maps/api/geocode/json?address=${
-                e.target.value
-            }&key=${APIKey.APIKey}`
-            )
+        axios.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${e.target.value}&key=${APIKey.APIKey}`)
             .then(function(response) {
-            
-            ths.setState({
-                
-                hometown: response.data.results[0].formatted_address
-    
-                
-    
+                ths.setState({
+                    hometown: response.data.results[0].formatted_address
+                });
             });
-            // .catch(function (error) {
-            //   console.log(error);
-            // }
-            // );
-            });
-        };
-
+    };
     
     submitSuccess = (newUser) =>{
         axios.post(`${backURL}/api/users/login`, {email: newUser.email, password: newUser.password})
@@ -101,14 +85,12 @@ class RegModal extends React.Component {
             if(response){
                 window.location = '/home'
             }
-    })
-        .catch(function(error){
-            
         })
-
-        
-        
+        .catch(function(error){
+            console.log(error);
+        })
     }
+
     submit = (e) => {
         e.preventDefault()
         const newUser = {
@@ -118,139 +100,140 @@ class RegModal extends React.Component {
             password2: this.state.password2,
             hometown: this.state.hometown,
             boards: this.state.boards
-            };
-
+        };
         var ths = this
         axios.post(`${backURL}/api/users/register`, newUser)
         .then(function (response) {
-           
             ths.submitSuccess(newUser)   
         })
         .catch(function (error) {
             let validation = error.response.data
-           ths.setState({
-               errors: [validation]
-           })
+            ths.setState({
+                errors: [validation]
+            })
         })
-
-        
     }
 
-    
     onChange = (e) => {
-        this.setState({ [e.target.id]: e.target.value });
-        };
+        this.setState({ 
+            [e.target.id]: e.target.value 
+        });
+    };
     
     render() {
         const { classes } = this.props;
-        
         return (
             <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={this.props.open}
-            onClose={this.props.handleClose}
-            className="modal"
-            >
-            <div  className={classes.paper}>
-            <form className={classes.container} >
-            <TextField
-                id="username"
-                name="username"
-                label="Username"
-                className={classes.textField}
-                onChange={this.onChange}
-                margin="normal"
-                variant="outlined"
-                required
-                error={this.state.error}
-                helperText={this.state.errors[0].username}
-            />
-            <TextField
-                id="email"
-                label="Email"
-                className={classes.textField}
-                onChange={this.onChange}
-                type="email"
-                name="email"
-                margin="normal"
-                required
-                variant="outlined"
-                helperText={this.state.errors[0].email}
-            />
-            <TextField
-                id="password"
-                label="Password"
-                className={classes.textField}
-                onChange={this.onChange}
-                type="password"
-                margin="normal"
-                variant="outlined"
-                required
-                helperText={this.state.errors[0].password}
-            />
-            <TextField
-                id="password2"
-                label="Confirm Password"
-                className={classes.textField}
-                onChange={this.onChange}
-                type="password"
-                margin="normal"
-                variant="outlined"
-                required
-                helperText={this.state.errors[0].password2}
-            />
-            <TextField
-                id="hometown"
-                label="Hometown"
-                className={classes.textField}
-                onChange={this.onChange}
-                onBlur={this.handleMaps}
-                type="text"
-                margin="normal"
-                variant="outlined"
-                required
-                helperText={this.state.hometown}
-                
-            />
-            {this.state.rows.map((row, i) => (
-                <div key={row._id}>
-                <TextField
-                    label="Board Type"
-                    id="boards"
-                    variant="outlined"
-                    style={inputStyle}
-                    onBlur={this.addBoard}
-                />
-                { this.state.rows.length > 1 &&
-                    <Button
-                    onClick={() => this.removeRow(i)}
-                    deletefieldrow={`rows[${i}]`}
-                    >
-                    Remove Board
-                    </Button>
-                }
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={this.props.open}
+                onClose={this.props.handleClose}
+                className="modal"
+                >
+                <div  className={classes.paper}>
+                    <form className={classes.container} >
+                        <TextField
+                            id="username"
+                            name="username"
+                            label="Username"
+                            className={classes.textField}
+                            onChange={this.onChange}
+                            margin="normal"
+                            variant="outlined"
+                            required
+                            error={this.state.error}
+                            helperText={this.state.errors[0].username}
+                            />
+                        <TextField
+                            id="email"
+                            label="Email"
+                            className={classes.textField}
+                            onChange={this.onChange}
+                            type="email"
+                            name="email"
+                            margin="normal"
+                            required
+                            variant="outlined"
+                            helperText={this.state.errors[0].email}
+                            />
+                        <TextField
+                            id="password"
+                            label="Password"
+                            className={classes.textField}
+                            onChange={this.onChange}
+                            type="password"
+                            margin="normal"
+                            variant="outlined"
+                            required
+                            helperText={this.state.errors[0].password}
+                            />
+                        <TextField
+                            id="password2"
+                            label="Confirm Password"
+                            className={classes.textField}
+                            onChange={this.onChange}
+                            type="password"
+                            margin="normal"
+                            variant="outlined"
+                            required
+                            helperText={this.state.errors[0].password2}
+                            />
+                        <TextField
+                            id="hometown"
+                            label="Hometown"
+                            className={classes.textField}
+                            onChange={this.onChange}
+                            onBlur={this.handleMaps}
+                            type="text"
+                            margin="normal"
+                            variant="outlined"
+                            required
+                            helperText={this.state.hometown}
+                            />
+                        {this.state.rows.map((row, i) => (
+                            <div key={row._id}>
+                                <TextField
+                                    label="Board Type"
+                                    id="boards"
+                                    variant="outlined"
+                                    style={inputStyle}
+                                    onBlur={this.addBoard}
+                                />
+                                {this.state.rows.length > 1 &&
+                                    <Button
+                                        onClick={() => this.removeRow(i)}
+                                        deletefieldrow={`rows[${i}]`}
+                                        >
+                                        Remove Board
+                                    </Button>
+                                }
+                            </div>
+                        ))}
+                        <br/><br/>
+                        <Button 
+                            variant="raised" 
+                            onClick={this.addRow}>
+                            Add another board
+                        </Button>
+                        <Divider style={{ margin: '20px 0' }} />
+                        <Button 
+                            variant="raised" 
+                            color="primary" 
+                            onClick={this.submit}>
+                            Submit
+                        </Button>
+                    </form>
+                    <RegModalWrapped />
                 </div>
-            ))}
-            <br /><br />
-            <Button variant="raised" onClick={this.addRow}>Add another board</Button>
-            <Divider style={{ margin: '20px 0' }} />
-            <Button variant="raised" color="primary" onClick={this.submit} >Submit</Button>
-            </form>
-                <RegModalWrapped />
-            </div>
             </Modal>
-            
-       
         );
     }
-    }
+}
 
-    RegModal.propTypes = {
+RegModal.propTypes = {
     classes: PropTypes.object.isRequired,
-    };
+};
 
-// We need an intermediary variable for handling the recursive nesting.
 const RegModalWrapped = withStyles(styles)(RegModal);
 
 export default RegModalWrapped;
