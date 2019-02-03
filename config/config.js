@@ -1,5 +1,5 @@
 module.exports = {  
-    jwtSecret: process.env.jwtSecret/* 'password' */,
+    jwtSecret: 'password',
     jwtSession: {
         session: false
     }
