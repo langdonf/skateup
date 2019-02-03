@@ -1,5 +1,5 @@
 module.exports = {  
-    //jwtSecret: 'password',
+    jwtSecret: 'password',
     jwtSession: {
         session: false
     }
