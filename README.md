@@ -50,7 +50,7 @@ Create an account to host events. It's free, and I won't send you spam because I
 
 
 ## Challenges
-- Material UI had a pretty hard time fighting Material UI a lot of the time.  The documentation was sparse, and only had example for 30% of the functionality, and when there were examples they were needlessly over complicated, mixing features and adding functionality unrelated to the component being described. The modal example... [for example](https://material-ui.com/utils/modal/).  I feel like it ended up making things more difficult overall and would probably stick to something more flexible next time. 
+- Material UI - I had a pretty hard time fighting Material UI a lot of the time.  The documentation was sparse, and only had example for 30% of the functionality, and when there were examples they were needlessly over complicated, mixing features and adding functionality unrelated to the component being described. The modal example... [for example](https://material-ui.com/utils/modal/).  I feel like it ended up making things more difficult overall and would probably stick to something more flexible next time. 
 
 <img src="https://i.imgur.com/eIMwpNk.png" width="360">
 
