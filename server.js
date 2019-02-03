@@ -8,6 +8,7 @@ const events = require("./routes/api/events");
 var cors = require('cors')
 const multer = require('multer')
 const path = require('path')
+require('heroku-self-ping')("https://skateup.herokuapp.com/");
 // generate a new express app and call it 'app'
 
 
