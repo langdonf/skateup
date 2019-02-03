@@ -22,7 +22,7 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
+        width: "100%",
     }
 });
 
@@ -106,6 +106,7 @@ class LogModal extends React.Component {
                         <Button 
                             variant="raised" 
                             color="primary" 
+                            
                             onClick={this.submit}>
                             Submit
                         </Button>

@@ -35,17 +35,22 @@ const styles = theme => ({
 	},
 	paper: {
 		position: "absolute",
-		top: "20%",
+		top: "10%",
 		right: "40%",
 		width: theme.spacing.unit * 50,
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing.unit * 4,
-		outline: "none"
+		outline: "none",
+		overflow:'scroll',
+        height: 680
 	},
 	textField: {
 		margin: 10
-	}
+	},
+	input: {
+		display: 'none',
+	  },
 });
 
 class Nav extends React.Component {
@@ -197,7 +202,7 @@ class Nav extends React.Component {
 		const { selectedDate } = this.state;
 		let navBarItems = [
 			<Button key={0} color="inherit" component={Link} to="/home">
-				Browse Events
+				Local Events
 			</Button>
 		];
 		if (window.localStorage.length > 0) {
@@ -250,6 +255,7 @@ class Nav extends React.Component {
 							handleClose={this.handleClose}
 						/>
 						<Modal
+						
 							aria-labelledby="simple-modal-title"
 							aria-describedby="simple-modal-description"
 							open={this.state.openCre}
@@ -311,6 +317,7 @@ class Nav extends React.Component {
 											multiline
 											rowsMax="8"
 											onChange={this.onChange}
+											variant="outlined"
 											className={classes.textField}
 											margin="normal"
 											fullWidth={true}
@@ -324,6 +331,7 @@ class Nav extends React.Component {
 											<DatePicker
 												margin="normal"
 												label="Date picker"
+												variant="outlined"
 												value={selectedDate}
 												onChange={this.handleDateChange}
 												required
@@ -331,13 +339,16 @@ class Nav extends React.Component {
 											<TimePicker
 												margin="normal"
 												label="Time picker"
+												variant="outlined"
 												value={selectedDate}
 												onChange={this.handleDateChange}
 												required
 											/>
 										</Grid>
+										<p
+										variant="subtitle2"> Upload Photo</p>
 										<input
-											hidden
+											variant="outlined"
 											onChange={this.onFileUpload}
 											name="photo"
 											className={classes.input}
@@ -347,6 +358,7 @@ class Nav extends React.Component {
 										/>
 										<label htmlFor="contained-button-file">
 											<Button
+											
 												variant="contained"
 												component="span"
 												className={classes.button}

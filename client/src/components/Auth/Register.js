@@ -13,18 +13,21 @@ import {backURL} from '../../constants'
 const styles = theme => ({
     paper: {
         position: 'absolute',
-        top: "10%",
+        top: "8%",
         right: "40%",
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
+        overflow:'scroll',
+        height: 680
+        
     },
 });
 const inputStyle = {
     marginRight: '20px',
-    width: '250px',
+    width: '350px',
 }
 
 class RegModal extends React.Component {
@@ -124,11 +127,12 @@ class RegModal extends React.Component {
         const { classes } = this.props;
         return (
             <Modal
+            scroll='body'
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 open={this.props.open}
                 onClose={this.props.handleClose}
-                className="modal"
+                
                 >
                 <div  className={classes.paper}>
                     <form className={classes.container} >
@@ -141,6 +145,7 @@ class RegModal extends React.Component {
                             margin="normal"
                             variant="outlined"
                             required
+                            style={inputStyle}
                             error={this.state.error}
                             helperText={this.state.errors[0].username}
                             />
@@ -153,6 +158,7 @@ class RegModal extends React.Component {
                             name="email"
                             margin="normal"
                             required
+                            style={inputStyle}
                             variant="outlined"
                             helperText={this.state.errors[0].email}
                             />
@@ -165,6 +171,7 @@ class RegModal extends React.Component {
                             margin="normal"
                             variant="outlined"
                             required
+                            style={inputStyle}
                             helperText={this.state.errors[0].password}
                             />
                         <TextField
@@ -176,7 +183,9 @@ class RegModal extends React.Component {
                             margin="normal"
                             variant="outlined"
                             required
-                            helperText={this.state.errors[0].password2}
+                            style={inputStyle}
+                            helperText={this.state.errors[0]
+                                .password2}
                             />
                         <TextField
                             id="hometown"
@@ -187,6 +196,7 @@ class RegModal extends React.Component {
                             type="text"
                             margin="normal"
                             variant="outlined"
+                            style={inputStyle}
                             required
                             helperText={this.state.hometown}
                             />
