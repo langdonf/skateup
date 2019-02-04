@@ -2,17 +2,15 @@
 @import "~slick-carousel/slick/slick-theme.css";
 *{
   font-family: 'Cuprum', sans-serif !important;
-  
 }
+
 a{
-  text-decoration: none
+  text-decoration: none !important;
 }
 
 .homeHero h3{
   text-shadow: 2px 2px 4px rgba(44, 62, 80, 1);
-
 }
-
 
 /* .MuiGridListTileBar-actionIcon-288{
   margin: 15px !important;

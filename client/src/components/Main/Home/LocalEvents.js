@@ -66,9 +66,10 @@ class LocalEvents extends React.Component{
 					},
                 });
                 ths.handleRange()
-				.catch(function (error) {
-                    console.log(error);
-				});
+				
+            })
+            .catch(function (error) {
+                console.log(error);
             });
     }
 

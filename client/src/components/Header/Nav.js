@@ -204,24 +204,24 @@ class Nav extends React.Component {
 		];
 		if (window.localStorage.length > 0) {
 			navBarItems.push(
-				<Button key={5} color="inherit"variant="h6" onClick={this.handleCreateOpen}>
+				<Button key={5} color="inherit" onClick={this.handleCreateOpen}>
 					Create an Event
 				</Button>,
-				<Button key={1} color="inherit" variant="h6" onClick={this.handleLogOut}>
+				<Button key={1} color="inherit" onClick={this.handleLogOut}>
 					Logout
 				</Button>,
-				<Button key={4} color="inherit" variant="h6" component={Link} to="/profile">
+				<Button key={4} color="inherit" component={Link} to="/profile">
 					Profile
 				</Button>
 			);
 		} else {
 			navBarItems.push(
-				<Button key={2} color="inherit" variant="h6" onClick={this.handleLogOpen}>
+				<Button key={2} color="inherit" onClick={this.handleLogOpen}>
 					Login
 				</Button>
 			);
 			navBarItems.push(
-				<Button key={3} color="inherit" variant="h6" onClick={this.handleRegOpen}>
+				<Button key={3} color="inherit" onClick={this.handleRegOpen}>
 					SignUp
 				</Button>
 			);

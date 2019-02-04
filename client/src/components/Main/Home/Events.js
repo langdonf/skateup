@@ -76,7 +76,7 @@ class Events extends React.Component{
                         aria-label="Add"
                         className={classes.margin}
                         component={Link} to={`/eventDetail/${tile._id}`}
-                    >
+                    > 
                         <NavigationIcon  className={classes.extendedIcon} />
                         More Info
                     </Fab>

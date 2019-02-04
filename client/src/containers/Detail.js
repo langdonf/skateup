@@ -314,6 +314,7 @@ class Detail extends React.Component{
 										scaledSize: new window.google.maps.Size(50, 50),
 										url: 'https://i.imgur.com/X49fAci.png',
 									}
+								// eslint-disable-next-line
 								var marker = new window.google.maps.Marker({
 									icon: icon,
 									animation: window.google.maps.Animation.BOUNCE,
@@ -377,7 +378,7 @@ class Detail extends React.Component{
 									required
 									className={classes.textField}
 									onBlur={this.handleMaps}
-									defaultValue={this.state.startName}
+									defaultValue={start}
 									type="text"
 									variant="outlined"
 									fullWidth={true}

@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithubSquare, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faUserTie } from '@fortawesome/free-solid-svg-icons/faUserTie'
-
+import Link from '@material-ui/core/Link';
 const styles = theme => ({
     footer: {
         backgroundColor: theme.palette.primary.main,
@@ -15,16 +15,17 @@ const styles = theme => ({
         },
     typography:{
         color: "#f5f5f5",
-        paddingLeft: 40
-    }
+        paddingLeft: 40,
+        paddingBottom: 16
+    },
 })
 
 function Footer(props) {
     const { classes } = props;
     return (
         <footer className={classes.footer}>
-            <Grid container spacing={20}>
-                <Grid item alignContent='space-around' xs={8} md={8}>
+            <Grid container spacing={24}>
+                <Grid item xs={8} sm={7} lg={8}>
                     <Typography className={classes.typography} variant="h5"align="left" gutterBottom>
                         SkateUp 
                     </Typography>
@@ -32,27 +33,34 @@ function Footer(props) {
                         Created by Langdon Froker for General Assembly WDI 49 capstone
                     </Typography>
                 </Grid>
-                <Grid  container alignContent='space-around' justify="space-around" xs={4} md={3} >
+                <Grid item container alignContent='space-around' justify="space-around" xs={4} sm={5} lg={4} >
                     <Grid item xs={12} sm={4}>
-                        <Typography className={classes.typography} variant="h4"  >
-                            <FontAwesomeIcon icon={faGithubSquare} />
-                        </Typography>
+                        <Link href="https://github.com/langdonf">
+                            <Typography className={classes.typography} variant="h4"  >
+                                <FontAwesomeIcon icon={faGithubSquare} />
+                            </Typography>
+                        </Link>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Typography className={classes.typography} variant="h4"  >
-                            <FontAwesomeIcon icon={faLinkedin} />
-                        </Typography>
+                        <Link href="https://www.linkedin.com/in/langdon-froker/">
+                            <Typography className={classes.typography} variant="h4"  >
+                                <FontAwesomeIcon icon={faLinkedin} />
+                            </Typography>
+                        </Link>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Typography className={classes.typography} variant="h4"  >
-                            <FontAwesomeIcon icon={faUserTie} />
-                        </Typography>
+                        <Link href="https://www.generalassemb.ly">
+                            <Typography className={classes.typography} variant="h4"  >
+                                <FontAwesomeIcon icon={faUserTie} />
+                            </Typography>
+                        </Link>
                     </Grid>
                 </Grid>
             </Grid>
         </footer>
     )
 }
+
 
 Footer.propTypes = {
     classes: PropTypes.object.isRequired,

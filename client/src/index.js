@@ -51,20 +51,18 @@ const theme = createMuiTheme(
             "hint":"rgba(0, 0, 0, 0.38)"
             }
         },
-        
-   
-}
+    }
 );
 
 ReactDOM.render(
-       <Router >
-         <MuiThemeProvider theme={theme}>
-         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <CssBaseline />
-            <App />
+    <Router >
+        <MuiThemeProvider theme={theme}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <CssBaseline />
+                <App />
             </MuiPickersUtilsProvider>
         </MuiThemeProvider>
-        </Router>
+    </Router>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

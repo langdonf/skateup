@@ -8,8 +8,6 @@ import Home from "./containers/Home"
 import Index from "./containers/Index"
 import Footer from "./components/Footer/Footer"
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
