@@ -9,7 +9,7 @@ import { faUserTie } from '@fortawesome/free-solid-svg-icons/faUserTie'
 import Link from '@material-ui/core/Link';
 const styles = theme => ({
     footer: {
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.dark,
         marginTop: theme.spacing.unit * 8,
         padding: `${theme.spacing.unit * 6}px 0`,
         },

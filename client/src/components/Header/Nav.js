@@ -56,7 +56,7 @@ class Nav extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedDate: new Date("2019-08-19T16:20:00"),
+			selectedDate: new Date(),
 			isLoggedIn: false,
 			openReg: false,
 			openLog: false,
