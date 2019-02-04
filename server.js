@@ -8,9 +8,6 @@ const events = require("./routes/api/events");
 var cors = require('cors')
 const multer = require('multer')
 const path = require('path')
-// require('heroku-self-ping')("https://skateup.herokuapp.com/");
-// generate a new express app and call it 'app'
-
 
 // serve static files in public
 app.use(bodyParser.json());
@@ -19,57 +16,40 @@ app.use(
     extended: true
   })
 );
-
-// 
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
 app.use(cors())
-
-
-
 //DB Config
 const db = require('./config/keys').mongoURI;
-
 //Connect to MongoDB
 mongoose
   .connect(db)
   .then(()=>console.log('MongoDB Connected...'))
   .catch(err => console.log(err))
-
 // Passport middleware
 app.use(passport.initialize());
-
 // Passport config
 require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/events", events);
 
-
-
 app.use('/uploads', express.static('uploads'))
-
 
 const port = process.env.PORT || 3001;
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static(path.join(__dirname, "client", "build")))
-  
   app.get('*', (req, res)=>{
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   });
 }else{
   app.use(express.static('public'))
   app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/client/public/index.html');
- 
+    res.sendFile(__dirname + '/client/public/index.html');
 })
 }
-
-
 app.listen(port, () => console.log(`Server started in port ${port}`))
 

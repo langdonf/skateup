@@ -7,11 +7,11 @@ import ProfileSidebar from '../components/Main/Home/ProfileSidebar'
 import EventsAttending from "../components/Main/Profile/EventsAttending";
 const style = {paddingTop: 120}
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
 });
 
 function Profile(props) {
@@ -32,7 +32,7 @@ function Profile(props) {
 }
 
 Profile.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Profile);

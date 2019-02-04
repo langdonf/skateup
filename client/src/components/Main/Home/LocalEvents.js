@@ -14,9 +14,6 @@ import {APIKey} from '../../../constants'
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation'
 
-
-
-
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
@@ -39,8 +36,6 @@ const styles = theme => ({
     }
 });
 
-
-
 class LocalEvents extends React.Component{
     constructor(props){
         super(props)
@@ -48,25 +43,18 @@ class LocalEvents extends React.Component{
             openMap: false,
             localEvents: [], 
             event: ''
-
         }
+    }   
 
-    }
-    
-   
     componentDidMount(){
-        
-        
         var id = localStorage.getItem('userId')
         Axios.get(`${backURL}/api/users/${id}`)
 			.then(response => {
-                
                 var home = response.data.data.hometown;
-                
                 this.handleLocalEvents(home)
 			})
-        
     }
+
     handleLocalEvents=(home)=>{
         var ths = this
         Axios.post(`https://maps.googleapis.com/maps/api/geocode/json?address=${home}&key=${APIKey}`)
@@ -76,42 +64,29 @@ class LocalEvents extends React.Component{
 						lat: response.data.results[0].geometry.location.lat,
 						lng: response.data.results[0].geometry.location.lng
 					},
-
-					
-
                 });
-               
-                
                 ths.handleRange()
-                
-				// .catch(function (error) {
-				//  
-				// }
-				// );
-            }
-            
-            );
-            
-        
+				.catch(function (error) {
+                    console.log(error);
+				});
+            });
     }
+
     handleRange=()=>{
         var ths = this
         Axios.get(`${backURL}/api/events/local/${this.state.home.lat}/${this.state.home.lng}`)
-                .then(response => {
-               
-                    ths.setState ({
-                        localEvents: response.data
-                    })
-                    
-                })
+            .then(response => {
+                ths.setState ({
+                    localEvents: response.data
+                })    
+            })
     }
 
     render(){
         const { classes } = this.props;
-        
         let allEvents = this.state.localEvents.map(tile => (
             <GridListTile key={tile.start.lat}>
-            <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
+                <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
                 <GridListTileBar id={tile._id}
                     title={tile.title}
                     subtitle={<span>in: {tile.city}</span>}
@@ -123,15 +98,14 @@ class LocalEvents extends React.Component{
                         aria-label="Add"
                         className={classes.margin}
                         component={Link} to={`/eventDetail/${tile._id}`}
-                      >
-                        <NavigationIcon  className={classes.extendedIcon} />
-                        More Info
-                      </Fab>
-            }
+                        >
+                            <NavigationIcon  className={classes.extendedIcon} />
+                            More Info
+                        </Fab>
+                    }       
                 />
             </GridListTile>
         ))
-        
         
         return (
             <Grid item xs={12}>
@@ -141,18 +115,13 @@ class LocalEvents extends React.Component{
                             <Typography component="div" variant="h4" >Events Near You</Typography>
                         </GridListTile>
                         {allEvents}
-
-                    
                     </GridList>
                 </Paper>
-
             </Grid>
-    );
+        );
+    }
 }
-        
-    
-}
-    
+
 LocalEvents.propTypes = {
     classes: PropTypes.object.isRequired,
 };

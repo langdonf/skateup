@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation'
 import Divider from '@material-ui/core/Divider'
+
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
@@ -38,7 +39,6 @@ const styles = theme => ({
     margin:{
         margin: theme.spacing.unit * 2,
     }
-    
 });
 
 class Events extends React.Component{
@@ -52,10 +52,8 @@ class Events extends React.Component{
     }
 
     componentDidMount(){
-        
         Axios.get(`${backURL}/api/events/all`)
         .then(response => {
-            
             this.setState ({
                 events: response.data
             })
@@ -67,46 +65,40 @@ class Events extends React.Component{
         let allEvents = this.state.events.map(tile => (
             <GridListTile key={tile.start.lat}>
             <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
-                <GridListTileBar id={tile._id}
-                    title={tile.title}
-                    subtitle={<span>in: {tile.city}</span>}
-                    actionIcon={
-                        <Fab
+            <GridListTileBar id={tile._id}
+                title={tile.title}
+                subtitle={<span>in: {tile.city}</span>}
+                actionIcon={
+                    <Fab
                         variant="extended"
                         size="small"
                         color="primary"
                         aria-label="Add"
                         className={classes.margin}
                         component={Link} to={`/eventDetail/${tile._id}`}
-                      >
+                    >
                         <NavigationIcon  className={classes.extendedIcon} />
                         More Info
-                      </Fab>
-                      
-                    }
-                        />
-                </GridListTile>
+                    </Fab>
+                }
+            />
+            </GridListTile>
         ))
-        
         
         return (
             <Grid className={classes.root}>
                 <Paper className={classes.root} elevation={1}>
-                <Typography component="div" color="secondary" variant="h4" >Featured SkateUp Events</Typography>
-                <Divider style={{ margin: '10px 0' }}/>
+                    <Typography component="div" color="secondary" variant="h4">
+                        Featured SkateUp Events
+                    </Typography>
+                    <Divider style={{ margin: '10px 0' }}/>
                     <GridList cellHeight={250} cols={2} className={classes.gridList}>
-                    
                         {allEvents}
-
-                    
                     </GridList>
                 </Paper>
-
             </Grid>
-    );
-}
-        
-    
+        );
+    }
 }
     
 Events.propTypes = {

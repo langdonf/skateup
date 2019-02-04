@@ -85,7 +85,7 @@ class LogModal extends React.Component {
                             margin="normal"
                             variant="outlined"
                             helperText={this.state.errors[0].email}
-                            />
+                        />
                         <TextField
                             id="password"
                             label="Password"
@@ -97,7 +97,7 @@ class LogModal extends React.Component {
                             margin="normal"
                             variant="outlined"
                             helperText={this.state.errors[0].password}
-                            /> 
+                        /> 
                         <br /> 
                         <br />
                         <Divider style={{ margin: '20px 0' }} />

@@ -11,12 +11,8 @@ const User = require("../../models/User");
 const getIdFromToken = require("../../config/passport")
 const multer = require(`multer`);
 
-
-// @route POST api/users/register
-// @desc Register user
-// @access Public
 router.post("/login", (req, res) => {
-        // Form validation
+    // Form validation
     const { errors, isValid } = validateLoginInput(req.body);
     // Check validation
     if (!isValid) {
@@ -38,50 +34,47 @@ router.post("/login", (req, res) => {
             const payload = {
             id: user.id,
             username: user.username
-            };
-            
+            };     
     // Sign token
             jwt.sign(
-            payload,
-            keys.secretOrKey,
+                payload,
+                keys.secretOrKey,
             {
                 expiresIn: 31556926 // 1 year in seconds
             },
             (err, token) => {
                 res.json({
-                success: true,
-                token: token,
-                userData: payload
+                    success: true,
+                    token: token,
+                    userData: payload
                 });
-                
                 }
-            
             );
         } else {
-            return res
-            .status(400)
-            .json({ passwordincorrect: "Password incorrect" });
+            return res.status(400).json({ passwordincorrect: "Password incorrect" });
         }
         });
     });
 })
+
 router.put('/edit/:id',(req, res)=>{
     User.findByIdAndUpdate({
         _id: req.params.id
     },req.body, {new: true})
         .exec(function (err, data){
             if (err){
-                    res.json({
-                            "error": err
-                    })
+                res.json({
+                    "error": err
+                })
             } else {
-                    console.log(data);
-                    res.json({
+                console.log(data);
+                res.json({
                     data
-                    })
+                })
             }
     })
 })
+
 router.post("/register", (req, res) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput(req.body);
@@ -110,14 +103,14 @@ router.post("/register", (req, res) => {
                 .then(user => res.json(user))
                 .catch(err => console.log(err));
             });
-            });
-        })
-        })
+        });
+    })
+})
+
 router.get('/:id', function (req, res) {
     User.findOne({
         _id: req.params.id
     }, function (err, userData) {
-
         if (err) {
             res.json({
                 "message": "invalid query",
@@ -136,4 +129,5 @@ router.get('/:id', function (req, res) {
         }
     });
 })
+
 module.exports = router;

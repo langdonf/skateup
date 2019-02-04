@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation'
 
-
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
@@ -24,9 +23,7 @@ const styles = theme => ({
         margin: theme.spacing.unit * 2,
     }
 });
-
-
-                
+            
 class eventsAttending extends React.Component{
     constructor(props) {
         super(props);
@@ -37,58 +34,62 @@ class eventsAttending extends React.Component{
     componentDidMount(){
         var ths = this
         var userId = localStorage.getItem('userId')
-        
         Axios.get(`${backURL}/api/events/attending/${userId}`)
         .then(response => {
-			console.log(response);
-			
-			
-			
-			ths.setState ({eventsAttending: response.data.data})
-		
-			
-		
-    })
+			ths.setState ({
+                eventsAttending: response.data.data
+            })
+	    })
     }
     render(){
-    const { classes } = this.props;
-
-    return (
+        const { classes } = this.props;
+        return (
             <Grid item xs={12}>
-                <Paper className={classes.root} elevation={1}>
-                <GridList cellHeight={180} className={classes.gridList}>
-                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                <Typography component="div" variant="h4" >Events you are Attending</Typography>
-                </GridListTile>
-                {this.state.eventsAttending.map(tile => (
-                <GridListTile key={tile.start.lat}>
-                    <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
-                    <GridListTileBar
-                    title={tile.title}
-                    subtitle={<span>in: {tile.city}</span>}
-                    actionIcon={
-                        <Fab
-                        variant="extended"
-                        size="small"
-                        color="primary"
-                        aria-label="Add"
-                        className={classes.margin}
-                        component={Link} to={`/eventDetail/${tile._id}`}
-                      >
-                        <NavigationIcon  className={classes.extendedIcon} />
-                        More Info
-                      </Fab>
-              }
-            />
-          </GridListTile>
-        ))}
-      </GridList>
+                <Paper 
+                    className={classes.root} 
+                    elevation={1}>
+                    <GridList 
+                        cellHeight={180} 
+                        className={classes.gridList}>
+                        <GridListTile 
+                            key="Subheader" 
+                            cols={2} 
+                            style={{ height: 'auto' }}>
+                            <Typography 
+                                component="div" 
+                                variant="h4"
+                                >
+                                Events you are Attending
+                            </Typography>
+                        </GridListTile>
+                        {this.state.eventsAttending.map(tile => (
+                            <GridListTile key={tile.start.lat}>
+                                <img src={`${backURL}/${tile.photo}`} alt={tile.title} />
+                                <GridListTileBar
+                                    title={tile.title}
+                                    subtitle={<span>in: {tile.city}</span>}
+                                    actionIcon={
+                                        <Fab
+                                            variant="extended"
+                                            size="small"
+                                            color="primary"
+                                            aria-label="Add"
+                                            className={classes.margin}
+                                            component={Link} 
+                                            to={`/eventDetail/${tile._id}`}
+                                        >
+                                            <NavigationIcon  className={classes.extendedIcon} />
+                                                More Info
+                                        </Fab>
+                                    }
+                                />
+                            </GridListTile>
+                        ))}
+                    </GridList>
                 </Paper>
-               
             </Grid>
-             
-    );
-}
+        );
+    }
 }
 
 export default withStyles(styles)(eventsAttending);

@@ -11,15 +11,15 @@ import LogModal from "../Auth/Login";
 import TextField from "@material-ui/core/TextField";
 import Divider from "@material-ui/core/Divider";
 import DateFnsUtils from "@date-io/date-fns";
+import Grid from "@material-ui/core/Grid";
+import axios from "axios";
+import APIKey from '../../constants'
+import {backURL} from '../../constants'
 import {
 	MuiPickersUtilsProvider,
 	TimePicker,
 	DatePicker
 } from "material-ui-pickers";
-import Grid from "@material-ui/core/Grid";
-import axios from "axios";
-import APIKey from '../../constants'
-import {backURL} from '../../constants'
 
 
 const styles = theme => ({
@@ -49,7 +49,7 @@ const styles = theme => ({
 	},
 	input: {
 		display: 'none',
-	  },
+	},
 });
 
 class Nav extends React.Component {
@@ -85,31 +85,33 @@ class Nav extends React.Component {
 		formData.append("userId", localStorage.getItem("userId"))
 		for (var key of formData.entries()) {
 			console.log(key[0] + ', ' + key[1])
-		}
-
+		};
 		axios
 			.post(`${backURL}/api/events/newevent`, formData)
-			.then(function(response) {
-				console.log(response);
-				window.location ='/home'
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
-		
+				.then(function(response) {
+					console.log(response);
+					window.location ='/home'
+				})
+				.catch(function(error) {
+					console.log(error);
+				});
 	};
+
 	onChange = e => {
 		this.setState({ [e.target.id]: e.target.value });
 	};
+
 	handleDateChange = date => {
 		this.setState({ selectedDate: date });
 	};
+
 	handleStateChange = loggedIn => {
 		this.setState({
 			isLoggedIn: loggedIn
 		});
 		this.props.login(this.state.isLoggedin);
 	};
+
 	handleClose = () => {
 		this.setState({ openReg: false, openLog: false });
 	};
@@ -139,12 +141,14 @@ class Nav extends React.Component {
 		localStorage.clear();
 		window.location = "/";
 	};
+
 	onFileUpload=(e)=>{
 		this.setState({
 			file:e.target.files[0]
 		})
-	}
-	handleCity = e => {
+	};
+
+	handleCity = (e) => {
 		var ths = this;
 		axios
 			.post(
@@ -155,20 +159,15 @@ class Nav extends React.Component {
 			.then(function(response) {
 				console.log(response);
 				ths.setState({
-					
 					city: response.data.results[0].formatted_address
-
-					
-
+				})
+				.catch(function (error) {
+					console.log(error);
 				});
-				// .catch(function (error) {
-				//   console.log(error);
-				// }
-				// );
 			});
 	};
 	
-	handleMaps = e => {
+	handleMaps = (e) => {
 		var ths = this;
 		axios
 			.post(
@@ -187,11 +186,11 @@ class Nav extends React.Component {
 
 					
 
-				});
-				// .catch(function (error) {
-				//   console.log(error);
-				// }
-				// );
+				})
+				.catch(function (error) {
+					console.log(error);
+				}
+				);
 			});
 	};
 
@@ -231,7 +230,6 @@ class Nav extends React.Component {
 			<div className={classes.root}>
 				<AppBar position="static" style={{ position: "fixed", top: 0 }}>
 					<Toolbar>
-						
 						<Typography
 							component={Link}
 							to="/"
@@ -253,17 +251,12 @@ class Nav extends React.Component {
 							handleClose={this.handleClose}
 						/>
 						<Modal
-						
 							aria-labelledby="simple-modal-title"
 							aria-describedby="simple-modal-description"
 							open={this.state.openCre}
 							onClose={this.handleCreateClose}
-							
 						>
-							<div
-								style={{ alignItems: "center", justifyContent: "center", height:620 }}
-								className={classes.paper}
-							>
+							<div style={{ alignItems: "center", justifyContent: "center", height:620 }} className={classes.paper}>
 								<MuiPickersUtilsProvider utils={DateFnsUtils}>
 									<form
 										encType="multipart/form-data"
@@ -281,7 +274,6 @@ class Nav extends React.Component {
 											fullWidth={true}
 											required
 										/>
-
 										<TextField
 											id="city"
 											label="City"
@@ -307,7 +299,6 @@ class Nav extends React.Component {
 											helperText={this.state.formatted}
 											required
 										/>
-									
 										<TextField
 											id="details"
 											label="Details"
@@ -320,11 +311,7 @@ class Nav extends React.Component {
 											fullWidth={true}
 											required
 										/>
-										<Grid
-											container
-											className={classes.grid}
-											justify="space-around"
-										>
+										<Grid container className={classes.grid} justify="space-around">
 											<DatePicker
 												margin="normal"
 												label="Date picker"
@@ -342,28 +329,27 @@ class Nav extends React.Component {
 												required
 											/>
 										</Grid>
-										<p
-										variant="subtitle2"> Upload Photo</p>
-										<input
-											variant="outlined"
-											onChange={this.onFileUpload}
-											name="photo"
-											className={classes.input}
-											id="contained-button-file"
-											type="file"
-											required
-										/>
-										<label htmlFor="contained-button-file">
-											<Button
-											
-												variant="contained"
-												component="span"
-												className={classes.button}
-											>
-												Browse
-											</Button>
-										</label>
-
+										<p variant="subtitle2">
+											Upload Photo
+										</p>
+											<input
+												variant="outlined"
+												onChange={this.onFileUpload}
+												name="photo"
+												className={classes.input}
+												id="contained-button-file"
+												type="file"
+												required
+											/>
+											<label htmlFor="contained-button-file">
+												<Button
+													variant="contained"
+													component="span"
+													className={classes.button}
+												>
+													Browse
+												</Button>
+											</label>
 										<Divider style={{ margin: "20px 0" }} />
 										<Button
 											variant="raised"

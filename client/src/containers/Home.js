@@ -7,11 +7,11 @@ import ProfileSidebar from '../components/Main/Home/ProfileSidebar'
 
 const style = {paddingTop: 120}
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit * 2,
+        paddingBottom: theme.spacing.unit * 2,
+    },
 });
 
 function Home(props) {
@@ -32,7 +32,7 @@ function Home(props) {
 }
 
 Home.propTypes = {
-  classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Home);

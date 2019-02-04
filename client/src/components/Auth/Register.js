@@ -146,7 +146,7 @@ class RegModal extends React.Component {
                             style={inputStyle}
                             error={this.state.error}
                             helperText={this.state.errors[0].username}
-                            />
+                        />
                         <TextField
                             id="email"
                             label="Email"
@@ -159,7 +159,7 @@ class RegModal extends React.Component {
                             style={inputStyle}
                             variant="outlined"
                             helperText={this.state.errors[0].email}
-                            />
+                        />
                         <TextField
                             id="password"
                             label="Password"
@@ -171,7 +171,7 @@ class RegModal extends React.Component {
                             required
                             style={inputStyle}
                             helperText={this.state.errors[0].password}
-                            />
+                        />
                         <TextField
                             id="password2"
                             label="Confirm Password"
@@ -183,7 +183,7 @@ class RegModal extends React.Component {
                             required
                             style={inputStyle}
                             helperText={this.state.errors[0].password2}
-                            />
+                        />
                         <TextField
                             id="hometown"
                             label="Hometown"
@@ -196,7 +196,7 @@ class RegModal extends React.Component {
                             style={inputStyle}
                             required
                             helperText={this.state.hometown}
-                            />
+                        />
                         {this.state.rows.map((row, i) => (
                             <div key={row._id}>
                                 <TextField
