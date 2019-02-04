@@ -58,7 +58,7 @@ class eventsAttending extends React.Component{
                 <Paper className={classes.root} elevation={1}>
                 <GridList cellHeight={180} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                <Typography component="div" variant="title" >Events you are Attending</Typography>
+                <Typography component="div" variant="h4" >Events you are Attending</Typography>
                 </GridListTile>
                 {this.state.eventsAttending.map(tile => (
                 <GridListTile key={tile.start.lat}>

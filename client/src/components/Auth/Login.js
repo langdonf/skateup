@@ -10,9 +10,8 @@ import axios from 'axios'
 
 const styles = theme => ({
     paper: {
-        position: 'absolute',
-        top: "20%",
-        right: "40%",
+        margin: "0 auto",
+		marginTop: "10%",
         width: theme.spacing.unit * 40,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
@@ -20,9 +19,7 @@ const styles = theme => ({
         outline: 'none',
     },
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: "100%",
+        width: 250
     }
 });
 
@@ -94,6 +91,7 @@ class LogModal extends React.Component {
                             label="Password"
                             className={classes.textField}
                             onChange={this.onChange}
+                            required
                             type="password"
                             name="password"
                             margin="normal"

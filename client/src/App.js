@@ -6,6 +6,8 @@ import Profile from './containers/Profile'
 import Detail from './containers/Detail'
 import Home from "./containers/Home"
 import Index from "./containers/Index"
+import Footer from "./components/Footer/Footer"
+
 
 
 class App extends Component {
@@ -30,6 +32,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/eventDetail/:eventId" component={Detail} />
+            <Footer />
         </div>
       </Router>
     );

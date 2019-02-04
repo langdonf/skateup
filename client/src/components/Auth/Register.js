@@ -12,9 +12,8 @@ import {backURL} from '../../constants'
 
 const styles = theme => ({
     paper: {
-        position: 'absolute',
-        top: "8%",
-        right: "40%",
+        margin: "0 auto",
+		marginTop: "10%",
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
@@ -22,12 +21,10 @@ const styles = theme => ({
         outline: 'none',
         overflow:'scroll',
         height: 680
-        
     },
 });
 const inputStyle = {
-    marginRight: '20px',
-    width: '350px',
+    width: '100%',
 }
 
 class RegModal extends React.Component {
@@ -76,7 +73,8 @@ class RegModal extends React.Component {
                 ths.setState({
                     hometown: response.data.results[0].formatted_address
                 });
-            });
+            }
+        );
     };
     
     submitSuccess = (newUser) =>{
@@ -106,9 +104,10 @@ class RegModal extends React.Component {
         };
         var ths = this
         axios.post(`${backURL}/api/users/register`, newUser)
-        .then(function (response) {
-            ths.submitSuccess(newUser)   
-        })
+            .then(function (response) {
+                ths.submitSuccess(newUser)   
+            }
+        )
         .catch(function (error) {
             let validation = error.response.data
             ths.setState({
@@ -127,12 +126,11 @@ class RegModal extends React.Component {
         const { classes } = this.props;
         return (
             <Modal
-            scroll='body'
+                scroll='body'
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 open={this.props.open}
                 onClose={this.props.handleClose}
-                
                 >
                 <div  className={classes.paper}>
                     <form className={classes.container} >
@@ -184,8 +182,7 @@ class RegModal extends React.Component {
                             variant="outlined"
                             required
                             style={inputStyle}
-                            helperText={this.state.errors[0]
-                                .password2}
+                            helperText={this.state.errors[0].password2}
                             />
                         <TextField
                             id="hometown"
@@ -203,7 +200,7 @@ class RegModal extends React.Component {
                         {this.state.rows.map((row, i) => (
                             <div key={row._id}>
                                 <TextField
-                                    label="Board Type"
+                                    label="Boards and Gear"
                                     id="boards"
                                     variant="outlined"
                                     style={inputStyle}
@@ -212,9 +209,8 @@ class RegModal extends React.Component {
                                 {this.state.rows.length > 1 &&
                                     <Button
                                         onClick={() => this.removeRow(i)}
-                                        deletefieldrow={`rows[${i}]`}
-                                        >
-                                        Remove Board
+                                        deletefieldrow={`rows[${i}]`}>
+                                        Remove Gear
                                     </Button>
                                 }
                             </div>
@@ -223,7 +219,7 @@ class RegModal extends React.Component {
                         <Button 
                             variant="raised" 
                             onClick={this.addRow}>
-                            Add another board
+                            Add more gear
                         </Button>
                         <Divider style={{ margin: '20px 0' }} />
                         <Button 

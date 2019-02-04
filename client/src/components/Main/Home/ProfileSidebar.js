@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from "axios";
 import {backURL} from '../../../constants'
+import profilePlaceholder from '../../../images/profilePlaceholder.jpg'
 
 var moment = require('moment');
 
@@ -24,11 +25,13 @@ const styles = theme => ({
         
     },
     paper: {
-		position: "absolute",
+		margin: "0 auto",
+		marginTop: "10%",
+        width: theme.spacing.unit * 50,
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing.unit * 4,
-		margin: theme.spacing.unit * 4,
+		
 		outline: "none"
 		},
     bigAvatar: {
@@ -49,9 +52,8 @@ const styles = theme => ({
       
 });
 const inputStyle = {
-    marginRight: '20px',
-    width: '450px',
-    padding: "10px"
+    
+    marginTop: "10px"
   }
 
 
@@ -155,8 +157,8 @@ class ProfileSidebar extends React.Component{
             <Grid item xs={12}>
                 <Paper className={classes.root} elevation={1}>
                     <Grid container >
-                    <Avatar alt="Remy Sharp" 
-                        src="https://scontent-lax3-2.xx.fbcdn.net/v/t31.0-8/14207637_10206003764886661_3602537242608403601_o.jpg?_nc_cat=107&_nc_ht=scontent-lax3-2.xx&oh=2bec00c1345da652d49d472378242c44&oe=5CFF3601" className={classes.bigAvatar} />
+                    <Avatar alt="default" 
+                        src={profilePlaceholder} className={classes.bigAvatar} />
                     <Typography style={{paddingTop: 18,fontFamily: 'Cuprum', }} color="secondary" variant="h3" component="h2">
 
                     {this.state.username}
@@ -245,7 +247,6 @@ class ProfileSidebar extends React.Component{
                 <div key={row._id}>
                 <TextField
                     label="Board Name"
-                    
                     fullWidth
                     className={classes.textField}
                     variant="outlined"

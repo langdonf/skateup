@@ -12,21 +12,21 @@ import {backURL} from '../../../constants'
 import { Link } from "react-router-dom";
 import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation'
-
+import Divider from '@material-ui/core/Divider'
 const styles = theme => ({
     root: {
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        marginLeft: theme.spacing.unit * 4,
-        marginRight:theme.spacing.unit * 4
+        marginLeft: theme.spacing.unit * 1,
+        marginRight:theme.spacing.unit * 1
     },
     actions: {
         display: 'flex',
     },
     paper: {
         position: 'absolute',
-        width: theme.spacing.unit * 100,
+        width: theme.spacing.unit * 120,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
@@ -92,10 +92,10 @@ class Events extends React.Component{
         return (
             <Grid className={classes.root}>
                 <Paper className={classes.root} elevation={1}>
-                    <GridList cellHeight={180} className={classes.gridList}>
-                        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                            <Typography component="div" variant="title" >SkateUp Events</Typography>
-                        </GridListTile>
+                <Typography component="div" color="secondary" variant="h4" >Featured SkateUp Events</Typography>
+                <Divider style={{ margin: '10px 0' }}/>
+                    <GridList cellHeight={250} cols={2} className={classes.gridList}>
+                    
                         {allEvents}
 
                     

@@ -34,9 +34,8 @@ const styles = theme => ({
 		marginRight: 20
 	},
 	paper: {
-		position: "absolute",
-		top: "10%",
-		right: "40%",
+		margin: "0 auto",
+		marginTop: "10%",
 		width: theme.spacing.unit * 50,
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
@@ -46,7 +45,7 @@ const styles = theme => ({
         height: 680
 	},
 	textField: {
-		margin: 10
+		marginTop: 15
 	},
 	input: {
 		display: 'none',
@@ -77,7 +76,6 @@ class Nav extends React.Component {
 		let formData = new FormData()
 		console.log(this.state.file); 
 		formData.append("title", this.state.title)
-		
 		formData.append("details",this.state.details)
 		formData.append("city", this.state.city)
 		formData.append("startLat", this.state.startPoint.lat)
@@ -263,7 +261,7 @@ class Nav extends React.Component {
 							
 						>
 							<div
-								style={{ alignItems: "center", justifyContent: "center" }}
+								style={{ alignItems: "center", justifyContent: "center", height:620 }}
 								className={classes.paper}
 							>
 								<MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -309,8 +307,7 @@ class Nav extends React.Component {
 											helperText={this.state.formatted}
 											required
 										/>
-										
-									 
+									
 										<TextField
 											id="details"
 											label="Details"
@@ -363,7 +360,7 @@ class Nav extends React.Component {
 												component="span"
 												className={classes.button}
 											>
-												Upload
+												Browse
 											</Button>
 										</label>
 

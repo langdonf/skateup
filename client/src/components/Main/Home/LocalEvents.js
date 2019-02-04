@@ -138,7 +138,7 @@ class LocalEvents extends React.Component{
                 <Paper className={classes.root} elevation={1}>
                     <GridList cellHeight={180} className={classes.gridList}>
                         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                            <Typography component="div" variant="title" >Events Near You</Typography>
+                            <Typography component="div" variant="h4" >Events Near You</Typography>
                         </GridListTile>
                         {allEvents}
 

@@ -299,7 +299,7 @@ class Detail extends React.Component{
 					{moment(deets.date).format("dddd, MMM Do hh:mm A")}
 				</Typography>
 				
-				<Typography variant="h6" >
+				<Typography variant="body1" >
 					{deets.details}
 				</Typography>
 				
@@ -307,7 +307,7 @@ class Detail extends React.Component{
 					Hosted by: {this.state.user}
 				</Typography>
 				<Typography align="left" variant="subtitle1">
-				{this.state.attendees} - attending
+				Attending: {this.state.attendees} 
 				</Typography>
 				
 				
@@ -333,15 +333,23 @@ class Detail extends React.Component{
 			id="myMap"
 			options={{
 			center: { lat: this.state.eventDetails.start.lat, lng: this.state.eventDetails.start.lng },
-			zoom: 14
+			zoom: 16
 			}}
 			onMapLoad={map => {
+				var icon = {
+					scaledSize: new window.google.maps.Size(50, 50),
+					url: 'https://i.imgur.com/X49fAci.png',
+
+				}
 			var marker = new window.google.maps.Marker({
-			position: { lat:this.state.eventDetails.start.lat, lng:this.state.eventDetails.start.lng  },
-			map: map,
-			title: deets.title
-			});
-			}}
+				icon: icon,
+				animation: window.google.maps.Animation.BOUNCE,
+				
+				position: { lat:this.state.eventDetails.start.lat, lng:this.state.eventDetails.start.lng  },
+				map: map,
+				title: deets.title
+				});
+				}}
 			/>
 		
 	</Grid>
