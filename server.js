@@ -9,6 +9,7 @@ var cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 
+require('dotenv').config();
 // serve static files in public
 app.use(bodyParser.json());
 app.use(
