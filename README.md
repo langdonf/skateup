@@ -12,7 +12,7 @@ There is a big group ride scene especially with the e-skate community.  I was al
 
 [www.skateup.herokuapp.com](https://skateup.herokuapp.com)
 
-Create an account to host events. It's free, and I won't send you spam because I don't know how to do that. 
+Create an account to host events. It's free, and I won't send you spam because I have no reason to do that. 
 
 ## Features
 
